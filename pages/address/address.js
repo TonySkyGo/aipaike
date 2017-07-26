@@ -1,0 +1,378 @@
+import { Promise } from '../../utils/util';
+let util = require('../../utils/util.js');
+let app = getApp();
+/**
+ *  查询接口
+ */
+// const API = 'http://japi.zto.cn/zto/api_utf8/baseArea?msg_type=GET_AREA&data=';
+const API = 'https://test.aipaike.com/api/common/getAreaList.jhtml?parentId=';
+Page({
+  data: {
+    appMaskFlag:false,
+    areaid:1033,
+    addressValue:'',
+    phoneValue:'',
+    personValue:'',
+    ybValue:'',
+    isDefault:true,
+    noAddressSelf:true,//地址区分是从哪里来
+    yesAddressSelf:false//地址区分是从哪里来
+  },
+  addDot: function (arr) {
+    if (arr instanceof Array) {
+      arr.map(val => {
+        if (val.areaName.length > 4) {
+          val.areaNameDot = val.areaName.slice(0, 4) + '...';
+          return val;
+        } else {
+          val.areaNameDot = val.areaName;
+          return val;
+        }
+      })
+    }
+  },
+  /**
+   * 初始化区域数据
+   */
+  onLoad: function (opa) {
+    console.log("===============================");
+    console.log(opa);
+  
+    //如果id有值的话说明是从列表点击编辑进来的
+    if(opa.id){
+      // debugger;
+      if(opa.zipcode == 'null'){
+        opa.zipcode = '';
+      }
+      this.setData({
+        addressValue:opa.address,
+        areaid:opa.areaid,
+        phoneValue:opa.phone,
+        personValue:opa.consignee,
+        ybValue:opa.zipcode,
+        isDefault:opa.isDefault,
+        id:opa.id,
+        areaname:opa.areaname,
+        address:opa.areaname,
+        noAddressSelf:false,
+        yesAddressSelf:true
+      })
+    }
+    this.setData({
+      isShow: false, // 显示区域选择框
+      showDistrict: true // 默认为省市区三级区域选择
+    });
+    Promise(wx.request, {
+      url: API + '0',
+      method: 'GET'
+    }).then((province) => {
+      // debugger
+      const firstProvince = province.data.content[0];
+      this.addDot(province.data.content);
+      /**
+       * 默认选择获取的省份第一个省份数据
+       */
+      this.setData({
+        proviceData: province.data.content,
+        'selectedProvince.index': 0,
+        'selectedProvince.code': firstProvince.areaId,
+        'selectedProvince.fullName': firstProvince.areaName,
+      });
+      return (
+        Promise(wx.request, {
+          url: API + firstProvince.areaId,
+          method: 'GET'
+        })
+      );
+    }).then((city) => {
+      const firstCity = city.data.content[0];
+      this.addDot(city.data.content);
+      this.setData({
+        cityData: city.data.content,
+        'selectedCity.index': 0,
+        'selectedCity.code': firstCity.areaId,
+        'selectedCity.fullName': firstCity.areaName,
+      });
+      /**
+       * 省市二级则不请求区域
+       */
+      if (this.data.showDistrict) {
+        return (
+          Promise(wx.request, {
+            url: API + firstCity.areaId,
+            method: 'GET'
+          })
+        );
+      } else {
+        this.setData({
+          value: [0, 0]
+        });
+        return;
+      }
+    }).then((district) => {
+      const firstDistrict = district.data.content[0];
+      this.addDot(district.data.content);
+      this.setData({
+        value: [0, 0, 0],
+        districtData: district.data.content,
+        'selectedDistrict.index': 0,
+        'selectedDistrict.code': firstDistrict.areaId,
+        'selectedDistrict.fullName': firstDistrict.areaName,
+        address: this.data.proviceData[0].areaName + ' - ' + this.data.cityData[0].areaName + ' - ' + district.data.content[0].areaName
+      });
+    }).catch((e) => {
+      console.log(e);
+    })
+  },
+  /**
+   * 页面选址触发事件
+   */
+  choosearea: function () {
+    this.setData({
+      isShow: true,
+      appMaskFlag:true
+    })
+  },
+  /**
+   * 滑动事件
+   */
+  bindChange: function (e) {
+    // debugger
+    const current_value = e.detail.value, _data = this.data;
+
+    console.log('发生滑动事件');
+    console.log("旧值");
+    console.log(_data.value);
+    console.log('新值：');
+    console.log(current_value);
+
+    if (current_value.length > 2) {
+      // 若省份值发生改变
+      if (this.data.value[0] !== current_value[0] 
+      // && this.data.value[1] === current_value[1] 
+      // && this.data.value[2] === current_value[2]
+      ) {
+        // 滑动省份
+        Promise(wx.request, {
+          url: API + _data.proviceData[current_value[0]].areaId,
+          method: 'GET'
+        }).then((city) => {
+          this.addDot(city.data.content);
+          this.setData({
+            cityData: city.data.content
+          })
+          return (
+            Promise(wx.request, {
+              url: API + city.data.content[0].areaId,
+              method: 'GET'
+            })
+          );
+        }).then((district) => {
+          if (district.data.content.length > 0) {
+            this.addDot(district.data.content);
+            this.setData({
+              districtData: district.data.content,
+              'value[0]': current_value[0],
+              'value[1]': 0,
+              'value[2]': 0
+            })
+
+            this.setData({
+              address: this.data.proviceData[current_value[0]].areaName + ' - ' + this.data.cityData[0].areaName + ' - ' + district.data.content[0].areaName,
+              areaname: this.data.proviceData[current_value[0]].areaName + ' - ' + this.data.cityData[0].areaName + ' - ' + district.data.content[0].areaName
+            })
+          }
+
+
+        }).catch((e) => {
+          console.log(e);
+        })
+      } else if (//若城市值发生了改变
+        this.data.value[0] === current_value[0] 
+      && this.data.value[1] !== current_value[1] 
+      // && this.data.value[2] === current_value[2]
+      ) {
+        // 滑动城市
+        Promise(wx.request, {
+          url: API + _data.cityData[current_value[1]].areaId,
+          method: 'GET'
+        }).then((district) => {
+          if (district.data.content.length > 0) {
+            this.addDot(district.data.content);
+            this.setData({
+              districtData: district.data.content,
+              'value[0]': current_value[0],
+              'value[1]': current_value[1],
+              'value[2]': 0,
+              address: this.data.proviceData[current_value[0]].areaName + ' - ' + this.data.cityData[current_value[1]].areaName + ' - ' + district.data.content[0].areaName,
+              areaname: this.data.proviceData[current_value[0]].areaName + ' - ' + this.data.cityData[0].areaName + ' - ' + district.data.content[0].areaName
+
+            })
+          }
+        }).catch((e) => {
+          console.log(e);
+        })
+
+      } else if (//地区值发生了改变
+        this.data.value[0] === current_value[0] 
+        && this.data.value[1] === current_value[1] 
+        && this.data.value[2] !== current_value[2]) {
+        // 滑动地区
+
+        this.setData({
+          value: current_value,
+          address: this.data.proviceData[current_value[0]].areaName + ' - ' + this.data.cityData[current_value[1]].areaName + ' - ' + this.data.districtData[current_value[2]].areaName,
+          areaname: this.data.proviceData[current_value[0]].areaName + ' - ' + this.data.cityData[current_value[1]].areaName + ' - ' + this.data.districtData[current_value[2]].areaName,
+          currentValue:current_value[2],
+          areaid:this.data.districtData[current_value[2]].areaId
+        })
+      }
+    }
+  },
+  //分别记录不同的值
+  personValue(event){
+    let personValue = event.detail.value;
+    this.setData({
+      personValue:personValue
+    })
+  },
+  phoneValue(evnet){
+    var phoneValue = evnet.detail.value;
+    var testPhone = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(14[0-9]{1}))+\d{8})$/;
+    if(testPhone.test(phoneValue)){
+      this.setData({
+        phoneValue:phoneValue
+      })
+    }else{
+       var tips = '格式不正确'
+       var imgicon = '../assets/images/warn_icon.png'
+       util.spTips(tips,imgicon)
+    }
+  },
+  addressValue(event){
+    let addressValue = event.detail.value;
+    this.setData({
+      addressValue:addressValue
+    })
+  },
+  ybValue(e){
+    let ybValue = e.detail.value;
+    this.setData({
+      ybValue:ybValue
+    })
+  },
+  onBandChange(e){
+    let flag = e.detail.value;
+    this.setData({
+      isDefault:flag
+    })
+  },
+  saveAndUse(event){
+    var that = this;
+    var saveUrl;
+    if(util.isEmpty(this.data.personValue) 
+      || util.isEmpty(this.data.phoneValue) 
+      || util.isEmpty(this.data.addressValue)){
+       var tips = '信息不完整...'
+       var imgicon = '../assets/images/warn_icon.png'
+       util.spTips(tips,imgicon)
+       return false;
+    }else{
+      
+      if(this.data.noAddressSelf){
+        // debugger;
+          let  receiverData = {};
+          receiverData.consignee = this.data.personValue;
+          receiverData.areaId = this.data.areaid;
+          receiverData.address = this.data.addressValue;
+          receiverData.zipCode = this.data.ybValue;
+          receiverData.phone = this.data.phoneValue;
+          receiverData.isDefault = this.data.isDefault;
+          var params = {
+            receiverData:JSON.stringify(receiverData)
+          };
+          saveUrl = app.globalData.apkBase + '/api/member/receiver/save.jhtml';
+      }else if(this.data.yesAddressSelf){
+          let  receiverData = {};
+          receiverData.consignee = this.data.personValue;
+          receiverData.areaId = this.data.areaid;
+          receiverData.address = this.data.addressValue;
+          receiverData.zipCode = this.data.ybValue;
+          receiverData.phone = this.data.phoneValue;
+          receiverData.isDefault = this.data.isDefault;
+          receiverData.receiverId = this.data.id;
+          var params = {
+            receiverData:JSON.stringify(receiverData)
+          };
+          saveUrl = app.globalData.apkBase + '/api/member/receiver/update.jhtml';
+      }
+      app.httpPOST(saveUrl,params,function(res){
+          if(res.data.code == 0){
+           var tips = '保存成功';
+           util.spTips(tips);
+           if(that.data.yesAddressSelf){
+              setTimeout(function(){
+                wx.navigateTo({
+                  url: '../gladdress/gladdress'
+                })
+              },800)
+            }else if(that.data.noAddressSelf){
+              setTimeout(function(){
+                wx.navigateTo({
+                  url: '../gladdress/gladdress'
+                })
+              },800)
+            }
+          }
+      })
+   }
+  },
+  sureAddressFn(event){
+    this.setData({
+      isShow:false,
+      appMaskFlag:false,
+      areaid:this.data.areaid
+
+    })
+    console.log(this.data.areaid);
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

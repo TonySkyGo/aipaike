@@ -1,0 +1,64 @@
+<import src='../common-template/coupon-number-template/coupon-number-template.wxml' />
+
+  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">  
+    <!-- 未使用 -->  
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+      <checkbox-group bindchange="checkboxChange"   data-checks="{{item.checks}}">
+      <view class="details_all"  wx:for="{{couponListUse}}"  wx:for-item="item" wx:for-index="idx">
+      
+        <view class="coupon_details"> 
+         <checkbox class="coupon_details_right_check"  value="{{item.couponCodeId}}-{{item.balanceTypeId}}-{{item.isExclusive}}-{{item.isDifferentExclusive}}" data-balanceTypeId="{{item.balanceTypeId}}" data-isExclusive="{{item.isExclusive}}" data-isDifferentExclusive="{{item.isDifferentExclusive}}" data-index = "{{idx}}" checked="{{item.isSelected}}"  />
+         <input id="{{item.couponCodeId}}" class="disnone" value="{{item.isExclusive}}"/>
+          <input id="{{item.couponCodeId}}"  class="disnone" value="{{item.balanceTypeId}}"/>
+            <view class="coupon_details_left">
+            <view class="coupon_details_left_centent">
+              <view class="coupon_details_left_num">
+                ￥{{item.denomination}}
+              </view>
+              <view class="coupon_details_left_explain">
+                {{item.desc}}
+              </view>
+              </view>
+            </view>
+            <view class="coupon_details_right">
+           
+            <view class="coupon_icon_md">{{item.useOrg}}</view>
+              <view class="coupon_details_right_top">
+                <view class="coupon_txt">
+                 {{item.orgName}}
+                </view>
+              </view>
+               <view class="coupon_user_date">
+                  <view class="user_date">{{item.beginDate == null ? '' : item.beginDate}}-{{item.endDate == null ? '' : item.endDate}}</view>
+                 
+                </view>
+                <view class="use_explain" bindtap="havenoUseSmDisplay">
+                  <view class="use_explain_txt"  data-idx="{{idx}}" >使用说明</view>
+                 <view class="{{userCellId == idx ? 'use_explain_arrow_up' : 'use_explain_arrow'}}"></view>
+                </view>
+            </view>
+        </view>
+        <view class="use_explain_zk {{userCellId == idx ? '' : 'disnone'}}">
+          <view class="use_explain_zk_content">
+           {{item.introduction}}
+          </view>
+        </view>
+        
+       </view>
+      </checkbox-group>
+     
+      
+      </scroll-view>  
+    </swiper-item>  
+    <!-- 已使用 -->  
+   
+    <!-- 已过期 -->  
+    
+</swiper>  
+<view class="activation" bindtap="usrCouponSure">
+  确定使用 
+</view>
+<template is="{{alertName}}" data="{{alertName,alertMask,coupon_code}}"></template>
+<view id="app-mask" style="display:{{alertMask}}"></view>

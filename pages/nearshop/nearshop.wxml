@@ -1,0 +1,32 @@
+<view class="nearshop_top">
+  <view class="nearshop_image">
+    <image src="{{homeImage}}" mode="widthFix"></image>
+  </view>
+  <view class="nearshop-name">
+    <text>{{storeName}}</text>
+    <view><icon />主营{{mainBusiness}}</view>
+  </view>
+</view>  
+  
+<view class="nearshop-info">门店信息</view>
+
+<view class="nearshop_box nearshop_address">
+ <navigator url="../nearshop/nearshopmap?lat={{latitudeQq}}&lng={{longitudeQq}}&title={{storeName}}">
+  <icon />
+  <text>{{address}}</text>
+  <view class="nearshop-right"></view>
+  <view class="nearshop-line"></view>
+ </navigator>
+</view>
+
+<view class="nearshop_box nearshop_time">
+  <icon />
+  <text>{{busenessHours}}</text>
+  <view class="nearshop-line"></view>
+</view>
+
+<view class="nearshop_box nearshop_phone" data-phone="{{telphone}}" bindtap="nearPhone">
+  <icon />
+  <text>{{telphone}}</text>
+  <view class="nearshop-right"></view>
+</view>

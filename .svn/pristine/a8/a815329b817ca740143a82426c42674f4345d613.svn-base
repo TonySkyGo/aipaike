@@ -1,0 +1,13 @@
+var app = getApp()
+Page({
+  data: {
+    movies: [
+      { url: 'http://img.aipaike.com/group1/M00/0D/17/Cvv7ZVe8LiqAUx1BAADbzFCEqcI070.jpg' },
+      { url: 'http://img.aipaike.com/group1/M00/0D/17/Cvv7ZVe8LiqAT_RUAADY-U9Jxes039.jpg' },
+      { url: 'http://img.aipaike.com/group1/M00/0D/17/Cvv7ZVe8LiqALKmGAADxrp38o2c269.jpg' },
+      { url: 'http://img02.tooopen.com/images/20141231/sy_78327074576.jpg' }
+    ]
+  },
+  onLoad: function () {
+  }
+})    

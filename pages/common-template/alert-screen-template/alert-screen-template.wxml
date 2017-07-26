@@ -1,0 +1,13 @@
+<template name="alert-screen-template">
+    <view class='fanx-container-wrap'>
+       <view class='fx-must-now'>返现须知</view>
+       <view class='y-tit'>
+           本商品享有返现优惠，订单成交后可返现到您的K币账户，下次消费可直接当现金抵用（1k币＝1元），还可与其他优惠方式叠加使用。返现的到账条件，是以您的订单交易成功且无退换货申请为前提，从支付到返现的期间为待返现状态。订单交易成功30天后或确认收货7天后，系统将自动返现到您的帐户。
+       </view>
+       <view class='bg-sure'>
+            <image class='wh-icon' src="../assets/images/y_copy.png" bindtap="closeAlert"></image>
+       </view>
+      
+       <image class='y-del' src="../assets/images/y_del.png" bindtap="closeAlert"></image>
+    </view>
+</template>

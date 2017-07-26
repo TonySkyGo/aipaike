@@ -1,0 +1,120 @@
+<!--pages/balances/balances.wxml-->
+<import src='../common-template/alert-screen-template/alert-screen-template.wxml' />
+
+<view class='current-time'>
+  <text class='red'>
+    付款剩余时间：23小时34分45秒
+  </text>
+</view>
+
+
+<view class='address-top-items'>
+
+  <image class='bar-bg' src="../assets/images/balance_bar.png"></image>
+
+  <view class='order-info-desc'>
+    <image class='y-order-icon' src="../assets/images/y_order_icon.png"></image>
+
+    <view class='colunm'>
+      <text>订单编号：1934655381252853</text>
+      <text>订单日期：2016-05-12 11:30:22</text>
+      <view>
+        <text>订单状态：</text>
+        <text style='color: #f48200'>待支付</text>
+      </view>
+    </view>
+  </view>
+
+
+  <view class='order-info-desc' style='border-bottom: none'>
+    <image class='y-order-icon' src="../assets/images/y_dingwei.png"></image>
+    <view class='yes-address'>
+      <view class='items-per-num'>
+        <text>收货人：yoomi</text>
+        <text>186780900766</text>
+      </view>
+      <view class='detail-address'>
+        <text>地址：</text>
+        <text>福建省厦门市思明区SM奥康品牌店福建省厦门市思明区SM奥康品牌店</text>
+      </view>
+    </view>
+  </view>
+  <image class='bar-bg' src="../assets/images/balance_bar.png"></image>
+</view>
+
+
+<view class='shop-container'>
+  <view class='goods-tit'>奥康旗舰店</view>
+  <view>
+    <view class="item-up">
+      <image class="goods-img" src="../assets/images/shoe_img.jpg"></image>
+      <view class="item-right-desc">
+        <text class='tt'>奥康皮鞋是什么样子奥康皮鞋是什么样子奥康皮鞋是什么样子奥康皮鞋是什么样子</text>
+        <view class="color-size">
+          <text>蓝色</text>
+          <text>38</text>
+          <text>x1</text>
+        </view>
+        <text>¥800.00</text>
+        <view class='wuliu-btn'>查看物流</view>
+      </view>
+    </view>
+    <view class="item-up">
+      <image class="goods-img" src="../assets/images/shoe_img.jpg"></image>
+      <view class="item-right-desc">
+        <text class='tt'>奥康皮鞋是什么样子奥康皮鞋是什么样子奥康皮鞋是什么样子奥康皮鞋是什么样子</text>
+        <view class="color-size">
+          <text>蓝色</text>
+          <text>38</text>
+          <text>x1</text>
+        </view>
+        <text>¥800.00</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='common-bar-flag'>
+    <text>留言备注：</text>
+    <text>检查鞋子是否有问题</text>
+   <!--  <input class='inp' type="text" placeholder="选填:对本次交易的说明备注" /> -->
+  </view>
+  <view class='xj-total-count'>
+      <text style='padding-right: 60rpx'>小计：￥1183</text>
+      <text>已优惠：￥183</text>
+  </view>  
+</view>
+
+
+<view class='special-flag-barx'>
+  <view style='font-size: 28rpx;color: #9a9a9a;'>关于售后：</view>
+  <view class='rows-area'>
+    <text style='font-size: 26rpx;color: #9a9a9a;width: 432rpx;'>
+      亲爱的用户，如果您对购买的商品，无论发货时效，商品质量，商品本身有任何疑问，需要进行退货、退款处理，可以关注右侧二维码‘爱拍客商城’公众号直接进行操作~
+    </text>
+     <image id='wc-pic' src="../assets/images/y_erwm.png"></image>
+  </view>
+</view>
+
+<view class='total-desc-flag' style='margin-bottom: 0;padding-bottom: 26rpx;'>
+  <text>商品金额：￥1000</text>
+  <text>运费：￥10</text>
+  <text>优惠券：－￥100</text>
+</view>
+
+<view class='common-bar-flag count-bar clearfix' style='margin-bottom: 128rpx;border-top: 1px solid #f2f2f2;'>
+  <text class='fan'>返</text>
+  <view style='display: inline-block;vertical-align: middle;'>
+    <text>本单可返利：</text>
+    <text class='red' style='font-size: 28rpx;'>¥65</text>
+  </view>
+  <image class='wh-icon' src="../assets/images/wh_icon.png"></image>
+</view>
+
+<view class='balance-footer-bar'>
+  <text class='red'>应付金额：￥110.00</text>
+  <button>微信支付</button>
+</view>
+<view wx:if='{{false}}'>
+  <template is='alert-screen-template'></template>
+</view>
+<view id='app-mask' wx:if='{{false}}'></view>

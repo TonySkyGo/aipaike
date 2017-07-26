@@ -1,0 +1,41 @@
+<import src='../../paysuccess/paysuccess.js' />
+<template name="goods-list-template">
+  <!--搜索列表开始-->
+  <view class="goods-list-template">
+    <swiper circular="true" style="height:1000rpx">
+      <swiper-item>
+        <scroll-view scroll-y>
+     
+          <view class="list-wrapper">
+          
+            <navigator url="../details/details?id={{item.spuId}}" class="goods-list-li" wx:for="{{likeList}}" wx:for-item="item">
+              <view class="images-pos">
+                <image class='goods-list-pic' src="{{item.thumbnail}}"></image>
+                <image class='bitMap-pic' src="../assets/images/Bitmap.png"></image>
+              </view>
+              <text class="goods-title">{{item.name}}</text>
+              <!--<view class="price-bsign-wrapper">
+                <text class="price">¥299</text>
+                <text class="bSign">会员</text>
+                <text class="bSign">特卖</text>
+              </view>-->
+              <view class="price-bsign-wrapper">
+                <view>
+                  <text class="bSign">会员</text>
+                  <text class="bSign">特卖</text>
+                  <text class="bSign">返利10%</text>
+                </view>
+                <text class="price">¥{{item.price}}</text>
+              </view>
+              <image class='tk-img' src=""></image>
+         </navigator>
+            
+          </view>
+         
+        </scroll-view>
+      </swiper-item>
+      
+    </swiper>
+  </view>
+  <!--搜索列表结束-->
+</template>

@@ -1,0 +1,44 @@
+<!--pages/address/address.wxml-->
+<view class='add-address-container'>
+  <view class='common-border'>
+    <text>收货人：</text>
+    <input class='inp' type="text" placeholder="" />
+  </view>
+  <view class='common-border'>
+    <text>手机号码：</text>
+    <input class='inp' type="number" maxlength="11" placeholder="" />
+  </view>
+  <view class='common-border' bindtap="choosearea">
+    <text>省/市/区：</text>
+    <input class='inp' type="text" placeholder="" value="{{address}}" />
+  </view>
+  <view class='common-border'>
+    <text>详细地址：</text>
+    <input class='inp' type="text" placeholder="" />
+  </view>
+  <view class='common-border'>
+    <text>邮编：</text>
+    <input class='inp' type="number" maxlength="6" placeholder="" />
+  </view>
+  <view style='margin-top: 16rpx;'>
+    <text>设为默认地址</text>
+    <text style='color: #999'>（每次下单时会默认使用该地址）</text>
+    <switch class='switch-btn' type='switch' name='switch' checked='true' color='#FB2F2E' bindchange='onBandChange'/>
+  </view>
+
+  <view class='saveUse'>保存并使用</view>
+</view>
+
+
+
+<picker-view wx:if="{{isShow}}" class="picker-view" indicator-style="height: 50px;" style="width: 100%; height: 300px;background: #ccc;" value="{{value}}" bindchange="bindChange">
+  <picker-view-column>
+    <view wx:for="{{proviceData}}" class="addr-item">{{item.areaName}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{cityData}}" class="addr-item">{{item.areaName}}</view>
+  </picker-view-column>
+  <picker-view-column wx:if="{{showDistrict}}">
+    <view wx:for="{{districtData}}" class="addr-item">{{item.areaName}}</view>
+  </picker-view-column>
+</picker-view>

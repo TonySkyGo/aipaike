@@ -1,0 +1,240 @@
+/* pages/balances/balances.wxss */
+@import "../common-template/alert-screen-template/alert-screen-template.wxss";
+
+.red{
+    color:#FF4545;
+}
+.address-top-items{
+ background: #fff; 
+ box-sizing: border-box;
+ margin: 24rpx 0;
+
+}
+.weixinpayfor{
+  width: 302rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  position: relative;
+  top: 20rpx;
+}
+.address-top-items image.bar-bg{
+    width: 750rpx;
+    height: 11rpx;
+}
+
+.address-top-items .no-address{
+    width: 750rpx;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    padding: 20rpx 36rpx;
+    box-sizing: border-box;
+    color: #5d5d5d;
+    font-size: 26rpx;
+}
+
+.y-right{
+     width: 14rpx;
+    height: 28rpx;
+}
+
+.no-address .y-right{
+    width: 14rpx;
+    height: 28rpx;
+    padding-top:11rpx;
+}
+.yes-address {
+    padding: 0 36rpx;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.items-per-num{
+    margin-bottom: 15rpx;
+}
+
+.items-per-num text:nth-of-type(1){
+    padding-right: 105rpx;
+}
+.yes-address .y-right{
+    width: 14rpx;
+    height: 28rpx;
+    padding-top:11rpx;
+    position: absolute;
+    top: 23%;
+    right:5%;
+}
+
+.yes-address text{
+    font-size: 26rpx;
+    color: #878787;
+}
+
+.detail-address text{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.detail-address text:nth-of-type(2){
+    width: 495rpx;
+    word-break: break-all;
+    line-height: 45rpx;
+}
+
+/*商品行数开始*/
+.item-up .goods-img {
+  width: 140rpx;
+  height: 140rpx;
+  border: 1px solid #f4f4f4;
+}
+
+.item-up {
+
+  display: flex;
+  background: #fff;
+  align-items:center;
+  border-bottom: 1px solid #f2f2f2;
+  padding:33rpx 0;
+
+}
+
+.item-up .item-right-desc {
+  padding-left: 32rpx;
+  font-size: 26rpx;
+  vertical-align: top;
+  height: 140rpx;
+  color: #828282;
+  width: 450rpx;
+}
+
+.shop-container{
+    padding: 36rpx 36rpx 36rpx 50rpx;
+    box-sizing: border-box;
+    background: #fff;
+    margin-bottom: 24rpx;
+}
+
+.shop-container .goods-tit{
+    font-size: 30rpx;
+    color: #565656;
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 10px;
+}
+
+.item-right-desc .color-size{
+  color: #828282;
+  font-size: 24rpx;
+  margin: 12rpx 0;
+}
+
+.item-right-desc .color-size text{
+    padding-right: 20rpx;
+}
+.item-up .item-right-desc .tt{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient:vertical;
+    height:37rpx;
+
+}
+
+.common-bar-flag{
+     border-bottom: 1px solid #f2f2f2;
+    padding: 14rpx 0;
+    font-size: 28rpx;
+    color: #747474;
+    box-sizing: border-box;
+}
+
+.common-bar-flag .inp{
+    display: inline-block;
+    width: 500rpx;
+    vertical-align: middle;
+}
+
+.count-bar{
+    background: #fff;
+    padding: 40rpx;
+    margin-bottom: 24rpx;
+}
+
+.count-bar  .y-right{
+    padding-left: 10rpx;
+    vertical-align: middle;
+}
+
+.count-bar  .wh-icon{
+    width: 36rpx;
+    height: 36rpx;
+    float: right;
+}
+
+.count-bar  .fan{
+    background: #FF6F07;
+    color: #fff;
+    font-size: 26rpx;
+    padding:3rpx 12rpx;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 16rpx;
+}
+
+.total-desc-flag{
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding:56rpx 40rpx;
+    box-sizing: border-box;
+    color: #626262;
+    font-size: 26rpx;
+    margin-bottom: 80rpx;
+}
+
+.total-desc-flag text{
+    margin-bottom: 15rpx;
+
+}
+
+.balance-footer-bar{
+    width: 750rpx;
+    background: #fff;
+    height: 128rpx;
+    line-height: 128rpx;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    padding:0 48rpx;
+    border-top: 1px solid #f2f2f2;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+<!--搜索列表开始-->
+  <view class="goods-list-template">
+    <scroll-view scroll-y='true' style='height: 1136rpx' bindscrolltolower='bindscrolltolower'>
+
+      <view wx:if="{{isEmptyFlag && content.length == 0 }}" style='text-align: center;'>
+        <image src="../assets/images/search_eee.png" style='display: block;width: 276rpx;height:267rpx;margin: 0 auto 50rpx; padding-top: 140rpx;'></image>
+        <text style='color: #959595;'>暂无此商品，换个方式搜索吧~</text>
+      </view>
+
+      <view wx:if="{{listGoodsList && content.length > 0}}" class="list-wrapper">
+        <navigator url="../details/details?id={{item.goodsId}}" hover-class="none" wx:for="{{content}}">
+          <view class="goods-list-li">
+            <view class="images-pos">
+              <image class='goods-list-pic' src="{{item.goodsImg}}"></image>
+            </view>
+            <text class="goods-title">{{item.goodsName}}</text>
+
+
+            <view class="price-bsign-wrapper">
+              <text class="price">¥{{item.showPrice}}</text>
+              <block>
+                <text wx:if="{{item.promotionMarkName != '' && item.promotionMarkName != null}}" class="bSign">{{item.promotionMarkName}}</text>
+                <text wx:if="{{item.vipName != '' && item.vipName != null}}" class="bSign">{{item.vipName}}</text>
+                <text wx:if="{{item.rebateRatioDsc != '' && item.rebateRatioDsc != null}}" class="bSign">{{item.rebateRatioDsc}}</text>
+              </block>
+            </view>
+
+           <!--  <view class="price-bsign-wrapper" wx:else>
+              <view>
+                <block>
+                  <text class="bSign">20</text>
+                </block>
+              </view>
+              <text class="price">¥{{item.showPrice}}</text>
+            </view> -->
+            <image wx:if="{{item.isSameStore}}" class='tk-img' src="../assets/images/list_tk.png"></image>
+          </view>
+        </navigator>
+      </view>
+    </scroll-view>
+  </view>
+  <!--搜索列表结束-->

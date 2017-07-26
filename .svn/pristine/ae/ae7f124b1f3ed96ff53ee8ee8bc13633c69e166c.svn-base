@@ -1,0 +1,155 @@
+
+.comprehensive{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.comprehensive_left{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 30rpx;
+  border-right: 2rpx solid #E7E7E7
+}
+.comprehensive_right{
+  width: 60%;
+   display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 10rpx;
+}
+.start_img {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 5rpx;
+}
+.comprehensive_txt{
+  color: #5E6767;
+}
+.comprehensive_num{
+  color: #FF4545;
+  font-size: 50rpx;
+  line-height: 90rpx;
+}
+.comprehensive_details{
+  
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx; 
+  margin-left: 30rpx;
+}
+.describe{
+  color: #5E6767
+}
+.start_img_small {
+  width: 35rpx;
+  height: 35rpx;
+  margin-left: 5rpx;
+}
+.comprehensive_right_num{
+  text-indent: 1em;
+  color: #FF4545;
+}
+.evaluate_list{
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.swiper-tab{  
+    width: 90%;  
+    border-bottom: 2rpx solid #777777;  
+    text-align: center;  
+    line-height: 80rpx;
+    margin: 0 auto;
+    border: 2rpx #E7E7E7 solid;
+    margin-top: 30rpx;
+    border-radius: 20rpx;
+  }  
+.swiper-tab-list{  
+    font-size: 30rpx;  
+    display: inline-block;  
+    width: 20%;  
+    color: #777777;  
+}  
+.on{ 
+    color: #fff;  
+    background: #FF6F07;
+    
+  }  
+  
+.swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; }  
+.swiper-box view{  
+     
+}  
+.evaluate_list_pj{
+  width: 98%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px #D0D0D0 solid;
+}
+.evaluate_alone{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+}
+.evaluate_portrait{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+}
+.portrait_img{
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+  display: block;
+  background: url(http://img.aipaike.com/group1/M00/10/26/Cvv7ZVk6Wi-AAv3GAABgjXEYI7w175.png) no-repeat;
+  background-size:cover 
+}
+.evaluate_details{
+  width: 75%;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+}
+.evaluate_txt{
+  color: #4A4A4A;
+  width: 100%;
+  line-height: 50rpx;
+  padding-top: 10rpx;
+  height: 100rpx;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+
+}
+.user_name{
+  width: 100%;
+  text-align: center;
+  line-height: 85rpx;
+  color: #9B9B9B;
+  font-size: 28rpx;
+}
+.colorandsize{
+  width: 100%;
+  color: #9B9B9B;
+  display: flex;
+  flex-direction: row;
+  font-size: 28rpx;
+  padding-top: 15rpx;
+}
+.evaluate_color{
+  width: 33.33%;
+  color: #9B9B9B;
+}
+.img_get{
+  margin-top: 42rpx;
+  width: 30%;
+  height: 100rpx;
+  margin-right: 3%;
+  margin-bottom: 20rpx;
+}
+.disnone{
+  display: none;
+}

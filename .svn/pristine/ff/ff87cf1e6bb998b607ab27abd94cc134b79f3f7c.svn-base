@@ -1,0 +1,193 @@
+ <view class="conitant">
+  <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
+      <block wx:for="{{movies}}" wx:for-index="index">    
+        <swiper-item>    
+          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
+        </swiper-item>    
+      </block>    
+    </swiper>  
+    <view class="title_price">
+      <view class="title_text">奥康男鞋 2016春季新品休闲纯色简约大方跟懒人乐福男单鞋</view>
+      <view class="price_num_sc">
+        <view class="scj_text">商城价:</view>
+        <view class="prinum">￥269</view>
+      </view>
+       <view class="price_num_shichang">
+        <view class="shichang_text">市场价:</view>
+        <view class="prinum_shichang">￥349</view>
+      </view>
+      <view class="menber_exclusive">
+        <view class="exclusive_icon"></view>
+        <view class="exclusive_txt">会员可再享8.8折，立省32元</view>
+      </view>
+    </view>
+    <view class="return_cash">
+      <view class="return_icon">返</view>
+      <view class="return_txt">
+        下单最高可反XX元
+      </view>
+      <view class="popup_win">
+      </view>
+    </view>
+    <view class="qualitygoods">
+      <view class="quality">
+        <view class="quality_icon"></view>
+        <view class="quality_txt">正品保障</view>
+      </view>
+      <view class="salesreturn">
+        <view class="quality_icon"></view>
+        <view class="quality_txt">7天无理由退货</view>
+      </view>
+      <view class="fastdelivery">
+        <view class="quality_icon"></view>
+        <view class="quality_txt">极速发货</view>
+      </view>
+    </view>
+    <view class="segmentation">
+    </view>
+    <view class="coupon">
+      <view class="coupon_txt">优惠券</view>
+      <view class="coupon_content">
+      <view class="coupon_icon">
+        满199减20
+      </view>
+      <view class="coupon_icon">
+        满199减20
+      </view>
+      <view class="coupon_icon">
+        满199减20
+      </view>
+      </view>
+      <view class="coupon_unm">
+      共4张
+      </view>
+      <view class="packup"></view>
+    </view>
+    <view class="coupon_list">
+        <view class="coupon_details">
+          <view class="coupon_details_left">
+            <view class="coupon_details_left_up">
+              <view class="coupon_details_unm">￥20</view>
+              <view class="coupon_details_icon"></view>
+            </view>
+            <view class="cooupon_details_left_dowm">
+              满199使用(部分特价商品和进口商品除外)使用
+            </view>
+          </view>
+          <view class="coupon_details_right">
+            <view class="getareadly">已领取</view>
+          </view>
+        </view>
+        <view class="coupon_details">
+          <view class="coupon_details_left">
+            <view class="coupon_details_left_up">
+              <view class="coupon_details_unm">￥20</view>
+              <view class="coupon_details_icon"></view>
+            </view>
+            <view class="cooupon_details_left_dowm">
+              满199使用(部分特价商品和进口商品除外)使用
+            </view>
+          </view>
+          <view class="coupon_details_right">
+            <view class="gethaveno">领取</view>
+          </view>
+        </view>
+        <view class="coupon_details">
+          <view class="coupon_details_left">
+            <view class="coupon_details_left_up">
+              <view class="coupon_details_unm">￥20</view>
+              <view class="coupon_details_icon"></view>
+            </view>
+            <view class="cooupon_details_left_dowm">
+              满199使用(部分特价商品和进口商品除外)使用
+            </view>
+          </view>
+          <view class="coupon_details_right">
+            <view class="getareadly">已领取</view>
+          </view>
+        </view>
+        <view class="coupon_details">
+          <view class="coupon_details_left">
+            <view class="coupon_details_left_up">
+              <view class="coupon_details_unm">￥20</view>
+              <view class="coupon_details_icon"></view>
+            </view>
+            <view class="cooupon_details_left_dowm">
+              满199使用(部分特价商品和进口商品除外)使用
+            </view>
+          </view>
+          <view class="coupon_details_right">
+            <view class="gethaveno">领取</view>
+          </view>
+        </view>
+      </view>
+       <view class="segmentation">
+    </view>
+<view class="salesPromotion">
+      <view class="salesPromotion_txt">促销</view>
+      <view class="coupon_content">
+      <view class="salesPromotion_icon">
+        赠品
+      </view>
+      <view class="discojct">
+        购买即送热销产品1件
+      </view>
+      </view>
+      <view class="packup"></view>
+    </view>
+    <view class="promotion_list">
+      <view class="promotion_details">
+        <view class="promotion_details_icon">赠品</view>
+        <view class="promotion_details_txt">购买即送热销产品1件</view>
+      </view>
+      <view class="promotion_details">
+        <view class="promotion_details_icon">满赠</view>
+        <view class="promotion_details_txt">购物满199元赠29.9元太阳伞           </view>
+      </view>
+      <view class="promotion_details">
+        <view class="promotion_details_icon">限购</view>
+        <view class="promotion_details_txt">此价格不与其它优惠套餐同时享受         </view>
+      </view>
+       <view class="promotion_details">
+        <view class="promotion_details_icon">满减</view>
+        <view class="promotion_details_txt">满499减100</view>
+      </view>
+       <view class="promotion_details">
+        <view class="promotion_details_icon">满减</view>
+        <view class="promotion_details_txt">满299减50</view>
+      </view>
+    </view>
+    <view class="salesPromotion">
+      <view class="salesPromotion_txt">请选择尺码</view>
+      <view class="coupon_content">
+        
+      </view>
+      <view class="packup"></view>
+    </view>
+    <view class="chosesize">
+      <view class="goodscolor">
+        <view class="color_txt">
+          颜色
+        </view>
+        <view class="colorclick goods_havano_chose">黑色</view>
+        <view class="colorclick goods_hava_chose">黑色</view>
+        <view class="colorclick goods_havano">黑色</view>
+      </view>
+      <view class="goodssize">
+        <view class="size_txt">
+          尺寸
+        </view>
+        <view class="sizeclick goods_havano_chose">36</view>
+        <view class="sizeclick goods_hava_chose">37</view>
+        <view class="sizeclick goods_havano">38</view>
+        <view class="sizeclick goods_havano_chose">36</view>
+        <view class="sizeclick goods_havano_chose">36</view>
+        <view class="sizeclick goods_havano_chose">36</view>
+      </view>
+      <view class="goods_num">
+         <view class="num_txt">
+          数量
+        </view>
+      </view>
+    </view>
+ </view>

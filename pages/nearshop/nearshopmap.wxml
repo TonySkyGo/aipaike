@@ -1,0 +1,3 @@
+
+<map id="myMap" longitude="{{lng}}" latitude="{{lat}}" scale="16" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 100%;"></map>
+

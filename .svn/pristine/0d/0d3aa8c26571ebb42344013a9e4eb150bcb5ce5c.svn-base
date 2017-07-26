@@ -1,0 +1,465 @@
+//index.js  
+//获取应用实例  
+var app = getApp()
+Page({
+  data: {
+    /** 
+        * 页面配置 
+        */
+    winWidth: 0,
+    winHeight: 0,
+    // tab切换  
+    currentTab: 0,
+    allowScroll: false,
+    contentHeight: 0,
+    listDataBoutique: [],
+    listDataSame: [],
+    loadingHidden: true,
+    commodity:'',
+    menberRankId:'',
+    listNearShop: [],
+    noNearShop: '',
+    lodingmore: '',
+    searchNearShop: '',
+    totalJp:'',
+    totalRx: '',
+    toTop:'flase',
+    topTo:0,
+  },
+  toTopButton:function(){
+    this.setData({
+      topTo:0,
+      toTop:'flase'
+    });
+
+  },
+  myCoupon:function(){
+    wx.navigateTo({
+      url: '../coupon/coupon',
+    })
+  },
+  scanCodeFun: function () {//扫二维码
+  wx.scanCode({
+    success: (res) => {
+      
+      if (res.result.indexOf('aipaike.com') < 0){
+        wx.showToast({
+          title: '抱歉，没有找到该商品!',
+          icon: '',
+          duration: 2000
+        });
+        return
+      }
+      console.log(res.result);
+      var urlArry = res.result.split('/m');
+      
+      var urlArryStr = urlArry[urlArry.length-1];
+      var spuidCodeArry = urlArryStr.split('.')
+      var spuidCode = spuidCodeArry[0];
+      var spuidCoade; 
+      if (spuidCode.length <= 6){
+        spuidCoade = spuidCode.substring(1,spuidCode.length)
+      }
+      if (spuidCode.length > 6 && spuidCode.length <= 8) {
+        spuidCoade = spuidCode.substring(2, spuidCode.length)
+      }
+      if (spuidCode.length > 8 && spuidCode.length <= 10) {
+        spuidCoade = spuidCode.substring(4, spuidCode.length)
+      }
+      wx.navigateTo({
+        url: '../details/details?id=' + spuidCoade
+      })
+      console.log(spuidCoade);
+    }
+  })
+  },
+  bindscrollGo:function(e){
+    
+    var that = this;
+    if (e.detail.scrollTop > 220){  
+      
+      that.setData({
+        allowScroll: "true",
+      })
+    } 
+    // if (e.detail.scrollTop < 180) {
+      
+    //   that.setData({
+    //     allowScroll: "flase",
+    //   })
+    // } 
+  },
+  bindscrollIn:function(e) {
+    var that = this;
+    if (e.detail.scrollTop <= 2) {
+         
+      that.setData({
+        allowScroll: "flase",
+      });  
+    }
+    // if (e.detail.scrollTop > 10) {
+    //   that.setData({
+    //     allowScroll: "true",
+    //   });
+    // }
+  },
+  lower: function () {//滚动到底部触发的函数底
+    var that = this; 
+    
+    that.setData({
+      allowScroll: true,    
+    })
+  },
+  upper: function () {//滚动到顶部触发的函数
+    var that = this;  
+    
+    that.setData({
+      allowScroll: false
+    })
+  },
+  jumpDetails:function(){
+
+    wx.navigateTo({
+      url: '../details/details?id=1'
+    })
+  },
+  boutiqueFreshTodown: function () {//精品推荐上拉刷新
+    var that = this;
+    var i = 2;
+    this.setData({
+      loadingHidden: false
+    });
+
+    setTimeout(function () {
+      var pageNumJp = Math.ceil(that.data.totalJp / 10);
+      var urlJp = "https://tadmin.aipaike.com/aoksearch/queryNewGoodsSR";
+      var data = { //精品推荐请求数据
+        tags: '精品推荐',
+        platform: 3,
+        isSameStore: true,
+        pageNum: i,
+        pageSize: 10,
+        tagsIdL:147,
+        menberRankId: that.data.menberRankId
+      }
+      app.httpGET(urlJp, data, function (res) {
+
+        var listIndex = that.data.listDataBoutique;
+        if (listIndex.length == that.data.totalJp) {
+          listIndex.length == that.data.totalJp;
+          return
+        }
+        for (var j = 0; j < res.data.content.goodsVoPage.content.length; j++) {
+          listIndex.push(res.data.content.goodsVoPage.content[j])
+        }
+
+        that.setData({
+          listDataBoutique: listIndex
+        });
+        ++i;
+      }, "GET");
+     
+      that.setData({
+        loadingHidden: true
+      });
+
+      that.update();
+    }, 1000);
+
+  },
+  sameFreshTodown: function () {//门店热销下拉刷新
+
+    var that = this;
+    var i = 2;
+    this.setData({
+      loadingHidden: false
+    });
+
+    setTimeout(function () {
+      var pageNumMd = Math.ceil(that.data.totalMd / 10);
+      var urlMd = "https://tadmin.aipaike.com/aoksearch/queryNewGoodsSR";
+      var data = { //门店热销请求数据
+        tags: '门店热销',
+        platform: 3,
+        isSameStore: true,
+        pageNum: 1,
+        pageSize: 10,
+        tagsId: 148,
+        menberRankId: that.data.menberRankId,
+        sort: 'salenum,desc'
+      }
+      app.httpGET(urlMd, data, function (res) {
+        var listIndex = that.data.listDataSame;
+        if (listIndex.length == that.data.totalRx) {
+          listIndex.length == that.data.totalRx;
+          return
+        }
+        for (var j = 0; j < res.data.content.goodsVoPage.content.length; j++) {
+          listIndex.push(res.data.content.goodsVoPage.content[j])
+        }
+        that.setData({
+          listDataSame: listIndex
+        });
+        ++i;
+      }, "GET");
+
+      wx.request({
+        url: 'https://tadmin.aipaike.com/aoksearch/queryNewGoodsSR?tags=门店热销&platform=3&isSameStore=true&pageNum=' + i + '&pageSize=10&menberRankId=' + that.data.menberRankId + '&sort=salenum,desc',
+        method: 'GET',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          var listIndex = that.data.listDataSame;
+          if (listIndex.length == that.data.totalRx) {
+            listIndex.length == that.data.totalRx;
+            return
+          }
+          for (var j = 0; j < res.data.content.goodsVoPage.content.length; j++) {
+            listIndex.push(res.data.content.goodsVoPage.content[j])
+          }
+          that.setData({
+            listDataSame: listIndex
+          });
+          ++i;
+        },
+        fail: function () {
+          // fail  
+        },
+        complete: function () {
+          // complete  
+        }
+      })
+      that.setData({
+        loadingHidden: true
+      });
+
+      that.update();
+    }, 1000);
+
+  },
+  nearPhone: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.phone
+    })
+  },
+  NearBlur(event) {
+    var that = this;
+    if (event.detail.value != '' || event.detail.value == undefined) {
+      setTimeout(function () {
+        /** 
+             * 获取用户位置信息 
+             */
+        if ( event.detail.value == undefined){
+          var keyword= '';
+        } else {
+          keyword = event.detail.value
+        }
+        wx.getLocation({
+          type: 'wgs84',
+          success: function (res) {
+            var latitude = res.latitude
+            var longitude = res.longitude
+
+            wx.request({//附近门店
+              url: app.globalData.apkBase + '/api/product/near.jhtml?lng=' + longitude + '&lat=' + latitude + '&storeName=' + keyword,
+              method: 'GET',
+              success: function (res) {
+                if (keyword == '') {
+                  that.setData({
+                    searchNearShop: ''
+                  })
+                }
+                if (res.data.content.length < 1) {
+                  that.setData({
+                    noNearShop: '暂时没有找到相关信息，为您推荐离您最近店铺',
+                    lodingmore: 'none',
+                    searchNearShop: ''
+                  })
+                } else {
+                  that.setData({
+                    listNearShop: [],
+                    listNearShop: res.data.content,
+                    lodingmore: 'none'
+                  })
+                }
+              },
+              fail: function () {
+                // fail  
+              },
+              complete: function () {
+                // complete  
+              }
+            })
+          },
+          fail: function () {
+            // fail  
+          },
+          complete: function () {
+            // complete  
+          }
+        });
+        that.setData({
+          loadingHidden: true
+        });
+        that.update();
+      }, 1000);
+    }
+  },
+  Category: function () {
+    wx.navigateTo({
+      url: '../category/category'
+    })
+  },
+  initData() {
+    var that = this;
+    /** 
+      * 获取用户位置信息 
+      */
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+
+        wx.request({//附近门店
+          url: app.globalData.apkBase + '/api/product/near.jhtml?lng=' + longitude + '&lat=' + latitude,
+          method: 'GET',
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+
+            if (res.data.content.length < 1) {
+              that.setData({
+                noNearShop: '您附近暂时没有门店',
+                lodingmore: 'none'
+              })
+            } else {
+              that.setData({
+                listNearShop: res.data.content,
+                lodingmore: 'none'
+              })
+            }
+          },
+          fail: function () {
+            // fail  
+          },
+          complete: function () {
+            // complete  
+          }
+        })
+      },
+      fail: function () {
+        // fail  
+      },
+      complete: function () {
+        // complete  
+      }
+    });
+    wx.getSystemInfo({//获取系统信息
+      success: function (res) {
+        console.log(res.windowHeight)
+        if (res.windowHeight >= 555) {
+          res.windowHeight = 530
+        }
+        that.setData({
+
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight,
+          contentHeight: res.windowHeight,
+        });
+      }
+    });
+    var urlJp = "https://tadmin.aipaike.com/aoksearch/queryNewGoodsSR";
+    var data = { //精品推荐请求数据
+      tags:'精品推荐',
+      platform:3,
+      isSameStore: true,
+      pageNum: 1,
+      pageSize: 10,
+      tagsIdL: 147,
+      menberRankId: that.data.menberRankId
+    }
+    app.httpGET(urlJp, data, function (res) {
+      
+      that.setData({
+        listDataBoutique: res.data.content.goodsVoPage.content,
+        totalJp: res.data.content.goodsVoPage.total
+      })
+    }, "GET");
+    var urlMd = "https://tadmin.aipaike.com/aoksearch/queryNewGoodsSR";
+    var data = { //精品推荐请求数据
+      tags: '门店热销',
+      platform: 3,
+      isSameStore: true,
+      pageNum: 1,
+      pageSize: 10,
+      tagsId:148,
+      menberRankId: that.data.menberRankId,
+      sort: 'salenum,desc'
+    }
+    app.httpGET(urlMd, data, function (res) {
+      
+      that.setData({
+        listDataSame: res.data.content.goodsVoPage.content,
+        totalRx: res.data.content.goodsVoPage.total
+      })
+    }, "GET");
+  },
+  onLoad: function () {
+    var that = this;
+    var timmer = null;
+    that.setData({
+      menberRankId: app.globalData.memberRankId
+    }); 
+    if (wx.getStorageSync('globalDataKey') == null || wx.getStorageSync('globalDataKey').javaToken == null) {
+      timmer = setInterval(function () {
+        app.getJavaTokenFn();
+        if (wx.getStorageSync('globalDataKey') && wx.getStorageSync('globalDataKey').javaToken) {
+          clearInterval(timmer);
+          that.initData();
+        }
+      }, 800)
+    }else{
+      that.initData();
+    }
+  },
+  scrollChange:function(e){
+    debugger
+    if (e.detail.scrollTop >= 500){
+      this.setData({
+        toTop:'true'
+      })
+    }
+    else{
+      this.setData({
+        toTop: 'false'
+      })
+    }
+  },
+  /*滑动切换tab*/
+  bindChange: function (e) {
+    var that = this;
+    that.setData({ currentTab: e.detail.current });
+    debugger
+  },
+  /* 点击tab切换*/
+  swichNav: function (e) {
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+      
+    }
+  },
+  // 跳转到搜索页面
+  goToSearch(){
+    wx.navigateTo({
+      url: '../searchs/searchs'
+    })
+  }
+})

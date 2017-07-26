@@ -1,0 +1,89 @@
+
+.goods-list-template {
+  width: 750rpx;
+  background: #f4f4f4;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.goods-list-template .goods-list-pic {
+  width: 312rpx;
+  height: 312rpx;
+}
+
+scroll-view {
+  height: 1000rpx;
+}
+
+.list-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.goods-list-template .goods-list-li {
+  position: relative;
+  width: 340rpx;
+  height: 501rpx;
+  padding: 15rpx;
+  box-sizing: border-box;
+  background: #fff;
+  margin-bottom: 24rpx;
+  border-radius: 15rpx;
+}
+
+.goods-list-li .goods-title {
+  font-size: 26rpx;
+  color: #353535;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  height: 37rpx;
+  margin-top: 13rpx;
+}
+
+.price-bsign-wrapper .bSign {
+  background: #fef2dc;
+  border-radius: 5rpx;
+  font-size: 22rpx;
+  padding: 2px 4px;
+  color: #b46a35;
+}
+
+.price-bsign-wrapper .bSign+.bSign {
+  margin-left: 4px;
+}
+
+.price-bsign-wrapper .price {
+  color: #060606;
+  font-size: 36rpx;
+  padding-right: 4px;
+  margin-top: 8rpx;
+}
+
+.price-bsign-wrapper {
+  margin-top: 8rpx;
+}
+
+.tk-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 62rpx;
+  height: 81rpx;
+}
+
+.list-wrapper .images-pos {
+  position: relative;
+}
+
+.list-wrapper .images-pos .bitMap-pic {
+  width: 100%;
+  height: 61rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

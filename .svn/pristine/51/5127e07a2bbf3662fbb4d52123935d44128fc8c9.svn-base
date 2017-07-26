@@ -1,0 +1,200 @@
+<import src='../common-template/goods-details-template/buy_count.wxml' />
+ <import src='../common-template/alert-screen-template/alert-screen-template.wxml' />
+ <import src="../wxParse/wxParse.wxml"/>
+ <view class="conitant">
+  <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
+      <block wx:for="{{movies}}" wx:for-index="index">    
+        <swiper-item>    
+          <image src="{{item}}" class="slide-image" mode="aspectFill"/>    
+        </swiper-item>    
+      </block>    
+    </swiper>  
+    <view class="title_price">
+      <view class="title_text">{{productName}}</view>
+      <view class="price_num_sc">
+        <view class="scj_text">商城价:</view>
+        <view class="prinum">￥{{price}}</view>
+      </view>
+       <view class="price_num_shichang">
+        <view class="shichang_text">市场价:</view>
+        <view class="prinum_shichang">￥{{marketPrice}}</view>
+      </view>
+      <view class="menber_exclusive"  wx:if="{{maxDiscount != null}}">
+        <view class="exclusive_icon"></view>
+        <view class="exclusive_txt">会员可再享{{maxDiscount}}折，立省{{discountPrice}}元</view>
+      </view>
+    </view>
+    <view class="return_cash" bindtap="alertDetails" wx:if="{{maxRbateValue != 0}}">
+      <view class="return_icon">反</view>
+      <view class="return_txt">
+        下单最高可反{{maxRbateValue}}元
+      </view>
+      <view class="popup_win" >
+      </view>
+    </view>
+    <view class="qualitygoods">
+      <view class="quality">
+        <view class="quality_icon"></view>
+        <view class="quality_txt">正品保障</view>
+      </view>
+      <view class="salesreturn">
+        <view class="quality_icon"></view>
+        <view class="quality_txt">7天无理由退货</view>
+      </view>
+      <view class="fastdelivery">
+        <view class="quality_icon"></view>
+        <view class="quality_txt">极速发货</view>
+      </view>
+    </view>
+    <view class="segmentation">
+    </view>
+    <view class="coupon {{couponVoPageList.length == 0 ? 'disnone' : '' }}" bindtap="couponDisplay">
+      <view class="coupon_txt">优惠券</view>
+      <view class="coupon_content" >
+      <view class="coupon_icon" wx:for="{{couponIcon}}" wx:for-index="index" wx:for-item="item">
+        <view class="{{item.fullBill==0 ? 'disnone' : ''}}"> {{item.denomination}}元券</view>
+        <view class="{{item.fullQuantity==0 ? 'disnone' : ''}}"> {{item.denomination}}元券</view>
+      </view>
+     
+      </view>
+      <view class="coupon_unm">
+      共{{couponVoPageList.length}}张
+      </view>
+      <view class="{{arrowCouponClassName}}" ></view>
+    </view>
+    <view class="coupon_list {{arrowCouponClassName == 'packdown' ? '' : 'disnone'}}">
+        <view class="coupon_details" wx:for="{{couponVoPageList}}" wx:for-index="index" wx:for-item="item">
+          <view class="coupon_details_left">
+            <view class="coupon_details_left_up">
+              <view class="coupon_details_unm">￥{{item.denomination}}</view>
+              <view class="coupon_details_icon"></view>
+            </view>
+            <view class="cooupon_details_left_dowm {{item.fullBill==0 ? 'disnone' : ''}}">
+              满{{item.fullBill}}减{{item.denomination}}({{item.useRange}})
+            </view>
+            <view class="cooupon_details_left_dowm {{item.fullQuantity==0 ? 'disnone' : ''}}">
+               满{{item.fullQuantity}}件减{{item.denomination}}({{item.useRange}})
+            </view>
+          </view>
+          <view class="coupon_details_right">
+            <view class="gethaveno" data-id = "{{item.id}}" bindtap="receiveCoupon">领取</view>
+          </view>
+        </view>
+      </view>
+       <view class="segmentation"></view>
+<view class="salesPromotion {{promotionVo.length == 0 ? 'disnone' : ''}}">
+      <view class="salesPromotion_txt">促销</view>
+      <view class="coupon_content">
+      <view class="salesPromotion_icon">
+        {{promotionVoFirst.simpleTitle}}
+      </view>
+      <view class="discojct">
+        {{promotionVoFirst.promotionMemo}}
+      </view>
+      </view>
+      <view class="{{salesCouponClassName}}" bindtap="salesDisplay"></view>
+    </view>
+    <view class="promotion_list {{salesCouponClassName == 'packdown' ? 'disnone' : ''}}">
+      <view class="promotion_details" wx:for="{{promotionVo}}" wx:for-index="index" wx:for-item="item">
+        <view class="promotion_details_icon">{{item.simpleTitle}}</view>
+        <view class="promotion_details_txt">{{item.promotionMemo}}</view>
+      </view>
+      
+    </view>
+    <view class="salesPromotion" bindtap="choseColorAndColorDisplay">
+      <view class="salesPromotion_txt">请选择尺码</view>
+      <view class="coupon_content">
+        
+      </view>
+      <view class="{{choseColorAndSize}}" ></view>
+    </view>
+    <view class="chosesize {{choseColorAndSize == 'packdown' ? 'disnone' : ''}}">
+      <view class="goodscolor">
+        <view class="color_txt">
+          颜色
+        </view>
+        <view class="colorAll" wx:for="{{colors}}" wx:key="value" wx:for-index="idx">
+        <view class="colorclick {{colorClicClass==idx ? 'goods_hava_chose':''}} " data-idx="{{idx}}" data-colorKeyHtml="{{item.key}}" bindtap="changeColorClass">{{item.value}}</view>
+       </view>
+      </view>
+      <view class="goodssize">
+        <view class="size_txt">
+          尺寸
+        </view>
+        <view class="sizeAll" >
+        <button type="" wx:for="{{sizes}}" wx:key="value" wx:for-index="indx" class=" {{item.isSelect == 'false' ? 'sizeclickfalse' : 'sizeclick'}} {{sizeClicClass==indx ? 'goods_hava_chose':''}}"  data-indx="{{indx}}" data-sizeKeyHtml="{{item.key}}" bindtap="changeSizeClass" disabled = "{{item.isSelect}}">{{item.value}}</button>
+        </view>
+      </view>
+      <template is="goods-details-template" data="{{countBuy,stockBuy}}"></template>
+    </view>
+    <view class="segmentation" wx:if="{{reviewList.length != 0}}"></view>
+    <view class="evaluate"  bindtap="evaluateDisplay" wx:if="{{reviewList.length != 0}}">
+      <view class="evaluate_txt">累计评价{{reviewList.length}}</view>
+      
+      <view class="Cumulative_icon"></view>
+    </view>
+    <view class="evaluate_list {{evaluateClassName == 'packdown' ? 'disnone' : ''}}">
+      <view class="evaluate_alone" wx:for="{{reviewList}}" wx:for-item="item" wx:for-index="index">
+        <view class="evaluate_portrait">
+          <view class="portrait_img"></view>
+          <view class="user_name">奥康皮鞋</view>
+        </view>
+        <view class="evaluate_details">
+          <view class="evaluate_txt">
+            {{item.content}}
+          </view>
+          <view class="colorandsize">
+            <view class="evaluate_color">颜色：{{item.color}}</view>
+            <view class="evaluate_color">尺码：{{item.size}}</view>
+            <view class="evaluate_creatTime">{{item.createDate}}</view>
+          </view>
+          <view class="{{item.image1 == null ? 'disnone' : 'evaluate_img'}}">
+              <image class="img_get" src="{{item.image1 != null ? item.image1 : ''}}"></image>
+               <image class="img_get" src="{{item.image2 != null ? item.image2 : ''}}"></image>
+                <image class="img_get" src="{{item.image2 != null ? item.image3 : ''}}"></image>
+          </view>
+        </view>
+      </view>
+     
+    </view>
+    <view class="segmentation">
+    </view>
+    <view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">商品详情</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">规格参数</view>    
+</view>  
+<swiper current="{{currentTab}}"  class="swiper-box" duration="300" style="height:1100rpx" bindchange="bindChange">   
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:960rpx">
+        <view class="pic-detaols">
+        <template is="wxParse" class="img_centent" data="{{wxParseData:replaecHtmlList.nodes}}"/>
+          <!--<image class="detaols_img" src="{{introduceList[index]}}"></image>-->
+        </view>
+      </scroll-view>  
+    </swiper-item>  
+    <swiper-item>  
+     <scroll-view scroll-y="true" style="height:980rpx">
+      <view class="specifications">
+        <view class="specifications_list" wx:for="{{attributeVo}}" wx:for-index="index" wx:for-item="item">
+          <view class="specifications_list_left">{{item.name}}</view>
+          <view class="specifications_list_right">{{item.value}}</view>
+        </view>
+      </view>  
+      </scroll-view> 
+    </swiper-item>   
+</swiper> 
+<view class="buy">
+
+  <view class="shopping_car" bindtap="jumpToCar">
+  <view class="car_num">{{carNum}}</view>
+    <image class='shopping_car_img' src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSAb3G_AAAFiptpFbY326.png"></image>
+    <view class="car_txt">购物车</view>
+    
+  </view>
+  
+  <view class="shopping_add" bindtap="putIntoShopCar" data-supid="{{spuIdshopCar}}" data-count="{{countBuy}}" data-color="{{colorKey}}" data-size="{{sizeKey}}">加入购物车</view>
+  <view class="shopping_buy" bindtap="buyAndSettlement" data-supid="{{spuIdshopCar}}" data-count="{{countBuy}}" data-color="{{colorKey}}" data-size="{{sizeKey}}">立即购买</view>
+</view>
+<template is="{{alertName}}" data="{{alertName,alertMask}}"></template>
+<view id="app-mask" style="display:{{alertMask}}"></view>
+</view>

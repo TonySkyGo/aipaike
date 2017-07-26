@@ -1,0 +1,387 @@
+"{
+    "errMsg": "request: ok",
+    "data": {
+        "code": 0,
+        "content": {
+            "goodsVoPage": {
+                "pageNumber": 1,
+                "pageSize": 20,
+                "totalPages": 1,
+                "content": [
+                    {
+                        "goodsId": 3184,
+                        "goodsName": "康龙16夏季新款小白鞋真皮舒适低帮系带男鞋日常休闲轻质板鞋",
+                        "goodsImg": "http: //img.aipaike.com/group1/M00/0A/DB/Cvv7ZVcqqnuARECaAADCO3z-ngo819.jpg",
+                        "logoImage": "",
+                        "marketPrice": 539,
+                        "price": 269,
+                        "org": 67,
+                        "isVip": true,
+                        "vipName": "会员",
+                        "pcVisitUrl": "/p03184.html",
+                        "mVisitUrl": "/m03184.html",
+                        "rebateRatio": 20,
+                        "rebateRatioDsc": "返20%",
+                        "isSameStore": true
+                    },
+                    {
+                        "goodsId": 3230,
+                        "goodsName": "康龙16夏季新款低帮套脚真皮舒适乐福鞋平底耐磨日常休闲男单鞋",
+                        "goodsImg": "http: //img.aipaike.com/group1/M00/0B/24/Cvv7ZVcxpCqAdUDgAAFI1QusUv8892.jpg",
+                        "logoImage": "",
+                        "marketPrice": 469,
+                        "price": 239,
+                        "org": 67,
+                        "isVip": true,
+                        "vipName": "会员",
+                        "pcVisitUrl": "/p03230.html",
+                        "mVisitUrl": "/m03230.html",
+                        "rebateRatio": 5,
+                        "rebateRatioDsc": "返5%",
+                        "isSameStore": true
+                    },
+                    {
+                        "goodsId": 3682,
+                        "goodsName": "康龙16夏季新款日常休闲轻质双肩背包校园风大号男包",
+                        "goodsImg": "http: //img.aipaike.com/group1/M00/0C/8A/Cvv7ZVeAUn2ADpqeAAGCw0TT2HA485.jpg",
+                        "logoImage": "",
+                        "marketPrice": 599,
+                        "price": 539,
+                        "org": 67,
+                        "isVip": true,
+                        "vipName": "会员",
+                        "pcVisitUrl": "/p03682.html",
+                        "mVisitUrl": "/m03682.html",
+                        "rebateRatio": 20,
+                        "rebateRatioDsc": "返20%",
+                        "isSameStore": true
+                    },
+                    {
+                        "goodsId": 4327,
+                        "goodsName": "测试缓存，批发不上架",
+                        "goodsImg": "http: //img.aipaike.com/group1/M00/10/26/Cvv7ZVk6RyqANaocAAIKw6lJ_0w463.png",
+                        "logoImage": "",
+                        "marketPrice": 299,
+                        "price": 299,
+                        "org": 67,
+                        "pcVisitUrl": "/p04327.html",
+                        "mVisitUrl": "/m04327.html",
+                        "isSameStore": true
+                    }
+                ],
+                "total": 4,
+                "searchProperty": null,
+                "searchValue": null,
+                "orderDirection": null,
+                "orders": [
+                    
+                ],
+                "filters": [
+                    
+                ]
+            },
+            "categorys": [
+                {
+                    "name": "男鞋/女鞋",
+                    "categoryGrade": 1,
+                    "subSearchCategoryVoList": [
+                        {
+                            "name": "精品男鞋",
+                            "categoryGrade": 2
+                        },
+                        {
+                            "name": "精品男鞋3",
+                            "categoryGrade": 2
+                        }
+                    ]
+                },
+                {
+                    "name": "皮具箱包",
+                    "categoryGrade": 1,
+                    "subSearchCategoryVoList": [
+                        {
+                            "name": "皮具箱包",
+                            "categoryGrade": 2
+                        }
+                    ]
+                }
+            ],
+            "priceAreas": [
+                {
+                    "price": "[
+    0TO300
+]",
+                    "count": 0,
+                    "startPrice": 0,
+                    "endPrice": 300
+                },
+                {
+                    "price": "[
+    300TO600
+]",
+                    "count": 0,
+                    "startPrice": 300,
+                    "endPrice": 600
+                }
+            ],
+            "searchFilterVos": [
+                {
+                    "key": "field03",
+                    "name": "闭合方式",
+                    "values": [
+                        "系带",
+                        "套脚"
+                    ]
+                },
+                {
+                    "key": "field04",
+                    "name": "鞋底材质",
+                    "values": [
+                        "EVA",
+                        "橡胶"
+                    ]
+                },
+                {
+                    "key": "field07",
+                    "name": "内里材质",
+                    "values": [
+                        "羊皮",
+                        "无内里"
+                    ]
+                },
+                {
+                    "key": "field08",
+                    "name": "制作工艺",
+                    "values": [
+                        "缝制鞋",
+                        "胶粘鞋"
+                    ]
+                },
+                {
+                    "key": "field09",
+                    "name": "跟底款式",
+                    "values": [
+                        "平跟",
+                        "摇摇鞋"
+                    ]
+                },
+                {
+                    "key": "field13",
+                    "name": "适用场景",
+                    "values": [
+                        "运动",
+                        "日常"
+                    ]
+                },
+                {
+                    "key": "field15",
+                    "name": "款式",
+                    "values": [
+                        "伐木鞋",
+                        "乐福鞋",
+                        "休闲皮鞋"
+                    ]
+                },
+                {
+                    "key": "field16",
+                    "name": "功能",
+                    "values": [
+                        "透气",
+                        "腰椎矫正"
+                    ]
+                }
+            ],
+            "firstCategory": {
+                "name": "男鞋/女鞋",
+                "categoryGrade": 1,
+                "subSearchCategoryVoList": [
+                    {
+                        "name": "精品男鞋",
+                        "categoryGrade": 2
+                    }
+                ]
+            }
+        },
+        "desc": "success"
+    },
+    "header": {
+        "Server": "openresty/1.9.3.1",
+        "Date": "Mon,
+19Jun201707: 47: 35GMT",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Content-Length": "2842",
+        "Connection": "keep-alive",
+        "Accept-Charset": "big5,
+big5-hkscs,
+cesu-8,
+euc-jp,
+euc-kr,
+gb18030,
+gb2312,
+gbk,
+ibm-thai,
+ibm00858,
+ibm01140,
+ibm01141,
+ibm01142,
+ibm01143,
+ibm01144,
+ibm01145,
+ibm01146,
+ibm01147,
+ibm01148,
+ibm01149,
+ibm037,
+ibm1026,
+ibm1047,
+ibm273,
+ibm277,
+ibm278,
+ibm280,
+ibm284,
+ibm285,
+ibm290,
+ibm297,
+ibm420,
+ibm424,
+ibm437,
+ibm500,
+ibm775,
+ibm850,
+ibm852,
+ibm855,
+ibm857,
+ibm860,
+ibm861,
+ibm862,
+ibm863,
+ibm864,
+ibm865,
+ibm866,
+ibm868,
+ibm869,
+ibm870,
+ibm871,
+ibm918,
+iso-2022-cn,
+iso-2022-jp,
+iso-2022-jp-2,
+iso-2022-kr,
+iso-8859-1,
+iso-8859-13,
+iso-8859-15,
+iso-8859-2,
+iso-8859-3,
+iso-8859-4,
+iso-8859-5,
+iso-8859-6,
+iso-8859-7,
+iso-8859-8,
+iso-8859-9,
+jis_x0201,
+jis_x0212-1990,
+koi8-r,
+koi8-u,
+shift_jis,
+tis-620,
+us-ascii,
+utf-16,
+utf-16be,
+utf-16le,
+utf-32,
+utf-32be,
+utf-32le,
+utf-8,
+windows-1250,
+windows-1251,
+windows-1252,
+windows-1253,
+windows-1254,
+windows-1255,
+windows-1256,
+windows-1257,
+windows-1258,
+windows-31j,
+x-big5-hkscs-2001,
+x-big5-solaris,
+x-compound_text,
+x-euc-jp-linux,
+x-euc-tw,
+x-eucjp-open,
+x-ibm1006,
+x-ibm1025,
+x-ibm1046,
+x-ibm1097,
+x-ibm1098,
+x-ibm1112,
+x-ibm1122,
+x-ibm1123,
+x-ibm1124,
+x-ibm1166,
+x-ibm1364,
+x-ibm1381,
+x-ibm1383,
+x-ibm300,
+x-ibm33722,
+x-ibm737,
+x-ibm833,
+x-ibm834,
+x-ibm856,
+x-ibm874,
+x-ibm875,
+x-ibm921,
+x-ibm922,
+x-ibm930,
+x-ibm933,
+x-ibm935,
+x-ibm937,
+x-ibm939,
+x-ibm942,
+x-ibm942c,
+x-ibm943,
+x-ibm943c,
+x-ibm948,
+x-ibm949,
+x-ibm949c,
+x-ibm950,
+x-ibm964,
+x-ibm970,
+x-iscii91,
+x-iso-2022-cn-cns,
+x-iso-2022-cn-gb,
+x-iso-8859-11,
+x-jis0208,
+x-jisautodetect,
+x-johab,
+x-macarabic,
+x-maccentraleurope,
+x-maccroatian,
+x-maccyrillic,
+x-macdingbat,
+x-macgreek,
+x-machebrew,
+x-maciceland,
+x-macroman,
+x-macromania,
+x-macsymbol,
+x-macthai,
+x-macturkish,
+x-macukraine,
+x-ms932_0213,
+x-ms950-hkscs,
+x-ms950-hkscs-xp,
+x-mswin-936,
+x-pck,
+x-sjis_0213,
+x-utf-16le-bom,
+x-utf-32be-bom,
+x-utf-32le-bom,
+x-windows-50220,
+x-windows-50221,
+x-windows-874,
+x-windows-949,
+x-windows-950,
+x-windows-iso2022jp"
+    },
+    "statusCode": 200
+}"

@@ -1,0 +1,13 @@
+<template name="goods-details-template">
+ <view class="goods_num" >
+         <view class="num_txt">
+          数量
+        </view>
+        <view class="counter_div">
+          <view class="counter_m {{countBuy <= 1 ? 'counter_m_num' : 'counter_m_num_on'}}" bindtap="subtraction"> - </view>
+          <view class="counter_num">{{countBuy}}</view>
+          <view class="counter_p {{countBuy == stockBuy ? 'counter_m_num' : 'counter_m_num_on'}}" bindtap="addition"> + </view>
+        </view>
+        <view class="stock_num" wx:if="{{stockBuy}}">库存{{stockBuy}}件  </view>
+      </view>
+</template>      

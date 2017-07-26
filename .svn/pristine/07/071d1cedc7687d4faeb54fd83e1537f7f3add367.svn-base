@@ -1,0 +1,203 @@
+var app = getApp();
+var QR = require("../../utils/wxqrcode.js");
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    winWidth: 0,
+    winHeight: 0,
+    // tab切换  
+    currentTab: 0,
+    alertName: "",//弹窗模板名
+    alertMask: "none",//是否显示遮罩
+    havenoUsesmArrow: "use_explain_arrow",//未使用初始样式
+    haveUsesmArrow: "use_explain_arrow",//已使用初始样式
+    haveOverdueArrow: "use_explain_arrow",//已过期初始样式
+    havenoUsesList: [],//未使用列表
+    haveUsesList: [],//已使用列表
+    haveOverdueList: [],//已过期列表
+    userCellId: '',//列表id 
+    userCellId2: '',//列表id
+    userCellId3: '',//列表id
+    coupon_code: '',//优惠券号
+    coupon_code_img: '',//优惠券号二维码
+    couponListUse: [],
+    couponListUseChose: [],
+    balanceTypeId: '',
+    checkTrueOrFalse: '',
+    balanceId: '',
+    isExclus: '',
+    isDifferent: '',
+    couponArrayIdUse:'',//判断是购物车的还是直接购买的
+  },
+  checkboxChange: function (e) {
+   
+    var that = this;
+    var couponList = [];
+    var BalanceTypeIdList = [];
+    var isExclusiveList = [];
+    var isDifferentExclusiveList = [];
+    var arrySplit = [];
+
+    for (var i = 0; i < e.detail.value.length-1; i++) {
+      var dataAllList = e.detail.value[i].split('-');
+      
+      if (e.detail.value[e.detail.value.length-1].split('-')[1] == e.detail.value[e.detail.value.length - 2].split('-')[1]) {
+        if (e.detail.value[e.detail.value.length-1].split('-')[2] == "true" || e.detail.value[e.detail.value.length - 2].split('-')[2] == "true") {
+          arrySplit.push(e.detail.value[e.detail.value.length - 2].split('-')[0])
+          
+        } 
+        if (e.detail.value[e.detail.value.length - 1].split('-')[2] == "false" && e.detail.value[e.detail.value.length - 2].split('-')[2] == "false") {
+          arrySplit.push(e.detail.value[e.detail.value.length - 2].split('-')[0]);
+          arrySplit.push(e.detail.value[e.detail.value.length-1].split('-')[0]);
+          
+        }
+      }
+      if (e.detail.value[e.detail.value.length-1].split('-')[1] != e.detail.value[e.detail.value.length - 2].split('-')[1]) {
+        if (e.detail.value[e.detail.value.length - 1].split('-')[3] == "true" || e.detail.value[e.detail.value.length - 2].split('-')[3] == "true") {
+          arrySplit.push(e.detail.value[e.detail.value.length - 2].split('-')[0])
+          
+        }
+        if (e.detail.value[e.detail.value.length - 1].split('-')[3] != "true" && e.detail.value[e.detail.value.length - 2].split('-')[3] != "true") {
+          arrySplit.push(e.detail.value[e.detail.value.length - 2].split('-')[0]);
+          arrySplit.push(e.detail.value[e.detail.value.length - 1].split('-')[0])
+        }
+      }
+      
+      // couponList.push(e.detail.value[i].split('-')[0]);
+      // BalanceTypeIdList.push(e.detail.value[i].split('-')[1])
+      // isExclusiveList.push(e.detail.value[i].split('-')[2])
+      // isDifferentExclusiveList.push(e.detail.value[i].split('-')[3]);
+
+    }
+    
+    for (var i = 0; i < that.data.couponListUse.length; i++) {
+      
+      var couponCodeId = that.data.couponListUse[i].couponCodeId;
+      for (var j = 0; j < arrySplit.length; j++) {
+        var couponCodeIdChecke = arrySplit[j];
+        
+        if (couponCodeId.toString() == couponCodeIdChecke) {
+          
+          that.data.couponListUse[j].isSelected = 'true'
+          
+        }
+         if (couponCodeId.toString() != couponCodeIdChecke) {
+           that.data.couponListUse[j].isSelected = 'false'
+           
+
+        }
+      }
+    }
+    
+    // couponListUse: JSON.parse(option.couponList),
+    that.setData({
+      couponListUse: that.data.couponListUse,
+      couponListUseChose: arrySplit
+    });
+
+
+  },
+  usrCouponSure: function () {//确定使用优惠券
+    var that = this;
+    var ConponListBack = that.data.couponListUseChose;
+
+    wx.navigateTo({
+      url: '../balances/balances?couponIdArry=' + ConponListBack + '&cartItemType=' + that.data.couponArrayIdUse,
+    })
+
+  },
+  havenoUseSmDisplay: function (e) { //设置未使用箭头样式
+    var that = this;
+
+    that.setData({
+      userCellId: e.target.dataset.idx,
+    });
+
+
+  },
+  haveUseSmDisplay: function (e) { //设置已使用箭头样式
+    var that = this;
+
+    that.setData({
+      userCellId2: e.target.dataset.indx,
+    });
+
+  },
+  haveOverdueDisplay: function (e) { //设置已过期箭头样式
+    var that = this;
+    that.setData({
+      userCellId3: e.target.dataset.indx,
+    });
+
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (option) {
+
+    var that = this;
+    that.setData({
+      couponListUse: JSON.parse(option.couponList),
+      balanceTypeId: JSON.parse(option.couponList),
+      couponArrayIdUse: option.couponArrayId
+
+    });
+    
+    /** 
+     * 获取系统信息 
+     */
+    wx.getSystemInfo({
+
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+    });
+  },
+  closeAlert: function () {
+    var that = this
+    that.setData({
+      alertName: "",
+      alertMask: "none",
+    })
+  },
+  alertConpunDetails: function (e) {
+    var that = this
+
+    that.setData({
+
+      coupon_code: e.target.dataset.code,
+      alertName: "coupon-number-template",
+      alertMask: "",
+    })
+  },
+  /** 
+     * 滑动切换tab 
+     */
+  bindChange: function (e) {
+
+    var that = this;
+    that.setData({ currentTab: e.detail.current });
+
+  },
+  /** 
+   * 点击tab切换 
+   */
+  swichNav: function (e) {
+
+    var that = this;
+
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
+  }
+})

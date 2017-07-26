@@ -1,0 +1,51 @@
+.goods_num{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: -30rpx;
+}
+.num_txt{
+  color: #555555;
+  width: 100rpx;
+  float: left;
+  height: 50rpx;
+  line-height: 60rpx;
+}
+.counter_div{
+  width: 270rpx;
+  height: 70rpx;
+  border: 1px solid #939393;
+  display: flex;
+  flex-direction: row;
+}
+.counter_m{
+  height: 70rpx;
+  width: 90rpx;
+  text-align: center;
+  line-height: 70rpx;
+  font-size: 40rpx;
+  color: #A9A9A9;
+}
+.counter_num{
+  height: 70rpx;
+  width: 90rpx;
+  border-left: 1px solid #939393;
+  border-right:1px solid #939393;
+  text-align: center;
+  line-height: 70rpx;
+}
+.counter_min{
+  height: 70rpx;
+  width: 90rpx;
+  text-align: center;
+  line-height: 70rpx;
+}
+.counter_p{
+  height: 70rpx;
+  width: 90rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #FA2827;
+  font-size: 40rpx;
+}

@@ -1,0 +1,448 @@
+/**index.wxss**/
+.container{
+  width:100%;
+  flex-direction:column;  
+}
+.toplogo{
+   background-image: url(http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2Wo2AVesbAAAnAHQavVU352.png);
+  background-size: cover;
+  width:100%;
+  flex-direction:column;
+  height: 330rpx;
+  font-size: 26rpx;
+}
+.logoimgtxt{
+  width: 100%;
+  position: absolute;
+  top: 60rpx; 
+}
+.img_logo{
+  width: 45%;
+  background: url(http://img.aipaike.com/group1/M00/10/23/Cvv7ZVk2b0WALS6_AAAdl-xBx2w458.png) no-repeat;
+  background-size:cover; 
+   margin: 0 auto;
+  height: 55rpx;
+}
+.logImg{
+  width: 30%;
+  background: url()
+}
+.searchBar{
+  width: 650rpx;
+  height: 90rpx;
+  position: relative;
+  line-height: 100rpx;
+  top: 180rpx;
+  background: white;
+  margin: 0 auto;
+  border-radius: 50rpx;
+  align-items: center;
+}
+.search_img{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 200rpx;
+  margin-top: 25rpx;
+  float: left;
+}
+.search_icon{
+  width: 70%;
+  height: 100rpx;
+  padding-left: 20rpx;
+  color: #B3ACA0
+}
+.navigation_menu{
+  flex-direction: row;
+  width: 100%;
+  display: flex;
+  background: #fff;
+}
+.coupon{
+  width: 33.333%;
+  padding-top: 20rpx;
+  display: flex;
+
+}
+.coupon_img{
+   width: 50%;
+   background-image: url(http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2Wo6ABmZiAAATSgxgN7Q196.png);
+height: 120rpx;
+background-size:cover; 
+margin: 0 auto;
+}
+.rule_line{
+  float: right; 
+  width: 3rpx; 
+  height: 100rpx;
+  border-right: 1px solid #ededed;
+  margin-top: 5rpx;
+  }
+.shopping{
+  width: 33.3%;
+  padding-top: 20rpx;
+  display: flex;
+}
+.shopping_img{
+   width: 50%;
+   background-image: url(http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2Wo6AWWSwAAATbb0Pg5Y386.png);
+height: 120rpx;
+background-size:cover; 
+margin: 0 auto;
+}
+.classify{
+  width: 33.3%;
+  padding-top: 20rpx;
+  display: flex;
+}
+.classify_img{
+   width: 50%;
+   background-image: url(http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2Wo6AFqlWAAAWiiENytQ717.png);
+height: 120rpx;
+background-size:cover; 
+margin: 0 auto;
+}
+.cllssify_text {
+  flex-direction: row;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  height: 50rpx;
+  padding-top: 10rpx;
+  padding-bottom: 15rpx;
+  color: #535967;
+}
+.coupon_txt{
+  width: 33.3%;
+  text-align: center;
+  font-size: 26rpx;
+}
+.shopping_txt{
+  width: 33.3%;
+  text-align: center;
+ font-size: 26rpx;
+}
+.rule_txt{
+  width: 33.3%;
+  text-align: center;
+  font-size: 26rpx;
+}
+.commodity_list{
+  width: 100%;
+  margin-top: 20rpx;
+}
+.swiper-tab{  
+    width: 100%;
+    background: #fff;
+    border-bottom: 2rpx solid #ecf4fa;  
+    text-align: center;  
+    line-height: 100rpx;
+}  
+    
+.swiper-tab-list{  
+    font-size: 26rpx;
+    display: inline-block;  
+    width: 33.333%;  
+    color: #535967;  
+}  
+.on{
+    color: #FE4A10;  
+    border-bottom: 5rpx solid #fe4a10;}   
+.swiper-box{ display: block;  width: 100%; overflow: hidden; }  
+
+.boutique_list{
+  width: 94%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  /*height: 950rpx;*/
+}
+.boutique_details{
+  margin-top: 32rpx;
+  height: 220rpx;
+  border-radius: 10rpx;
+  background: #fff;
+  box-shadow: #DAE3E9 0 0 20rpx ;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+ 
+}
+.boutique_img{
+  text-align: center;
+  width: 200rpx;
+  border: 1rpx #EFEFEF solid;
+  height: 200rpx;
+  display: table-cell;
+  vertical-align:middle;
+  position: relative;
+}
+.activity_img {
+  background: url(http://img.aipaike.com/group1/M00/10/23/Cvv7ZVk2dvOAAu2JAAAy8vIagyY627.png) bottom no-repeat;
+  background-size: contain
+}
+.storeshinee{
+  background: url(http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2Wo6ABW7AAAAMqdFRiA0292.png) no-repeat;
+  width: 100rpx;
+  height: 100rpx;
+  background-size: contain;
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+}
+.shoe_img{
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+  vertical-align:middle;
+}
+.navigator_details{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.boutique_info{
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  width: 470rpx;
+  
+}
+.boutique_title{
+  height: 135rpx;
+  text-align: left;
+  font-size: 26rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.price_pay{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  height: 80rpx;
+}
+.price{
+  font-size: 40rpx;
+  font-weight: bold;
+  float: left;
+  line-height: 60rpx;
+}
+.member_icon{
+  height: 40rpx;
+  width: 55rpx;
+  margin: 15rpx 0 0 10rpx;
+  color: #fff;
+  font-size: 23rpx;
+  text-align: center;
+  font-weight: bold;
+  line-height: 40rpx;
+  border-radius: 10rpx;
+}
+.member_bg{
+  background: #FF6F07;
+}
+.selling_bg{
+  background: #FB2F2E;
+}
+.rebate_bg{
+  background: #6DB127;
+  width: 75rpx;
+}
+.pay{
+  width: 100rpx;
+  position: absolute;
+  right: 0;
+  float: right;
+  text-align: right;
+  margin-top: -10rpx;
+}
+.pay_img{
+  width: 80rpx;
+  height: 80rpx;
+}
+.disnone{
+  display: none;
+}
+.lodingmore{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #777777;
+  position: relative;
+  bottom: 0rpx;
+}
+.nearshop {
+  background: #fff;
+}
+
+.searchNearshop {
+  width: 738rpx;
+  height: 96rpx;
+  border-bottom: solid 2rpx #f6f6f6;
+  overflow: hidden;
+  margin: 0 auto 10rpx;
+  position: relative;
+}
+
+.nearshop_icon {
+  position: absolute;
+  background: url(http://img.aipaike.com/group1/M00/10/34/Cvv7ZVlR_MuAQIkVAAAFCHViUSA865.png) no-repeat;
+  background-size: contain;
+  display: block;
+  width: 33rpx;
+  height: 33rpx;
+  left: 54rpx;
+  top: 33rpx;
+}
+
+.nearshop_inp {
+  width: 80%;
+  padding-left: 100rpx;
+  font-size: 26rpx;
+  height: 100%;
+  line-height: 100%;
+}
+
+.nearshop_loc {
+  position: absolute;
+  background: url(http://img.aipaike.com/group1/M00/10/34/Cvv7ZVlR_MuAMHrDAAAEXCQi1FU939.png) no-repeat;
+  background-size: contain;
+  display: block;
+  width: 28rpx;
+  height: 40rpx;
+  right: 54rpx;
+  top: 29rpx;
+}
+
+.nearshop_list {
+  width: 738rpx;
+  margin: 0 auto;
+  height: 950rpx;
+  overflow: hidden;
+}
+
+.nearshop_details {
+  box-shadow: 0 0 24rpx 0 rgba(217,226,232,0.50);
+  border-radius: 8rpx;
+  width: 690rpx;
+  margin: 30rpx 24rpx 6rpx 24rpx;
+  position: relative;
+  box-sizing: border-box;
+  padding: 55rpx 30rpx 36rpx 60rpx;
+}
+
+.nearshop_info {
+  display: flex;
+  flex-direction: row;
+  height: 120rpx;
+}
+
+.nearshop_info image {
+  width: 114rpx;
+  height: 114rpx;
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.nearshop_na {
+  width: 456rpx;
+  padding-left: 30rpx;
+}
+
+.nearshop_name {
+  font-size: 28rpx;
+  display: block;
+  line-height: 54rpx;
+}
+
+
+.nearshop_address {
+  font-size: 24rpx;
+  display: block;
+  line-height: 36rpx;
+}
+
+.nearshop_address icon {
+  float: left; 
+  display: block;
+  width: 10rpx;
+  height: 10rpx;
+  background: url(http://img.aipaike.com/group1/M00/10/34/Cvv7ZVlSBd6AUzjdAAAA3tuiBCc035.png) no-repeat;
+  background-size: contain;
+  margin: 15rpx 8rpx 0 0;
+}
+
+.nearshop_location {
+  position: absolute;
+  background: url(http://img.aipaike.com/group1/M00/10/34/Cvv7ZVlSBd6ARRmTAAAGqPFIP8g461.png) no-repeat;
+  background-size: contain;
+  text-align: center;
+  color: #fff;
+  font-size: 24rpx;
+  right: 30rpx;
+  top: 0;
+  width: 100rpx;
+  height: 98rpx;
+  overflow: hidden;
+  padding-top: 46rpx;
+  line-height: 30rpx;
+}
+
+.nearshop_phone icon {
+  float: left;
+  width: 84rpx;
+  height: 125rpx;
+  background: url(http://img.aipaike.com/group1/M00/10/34/Cvv7ZVlSCQmAH1ZLAAC7kpa3Wis416.png) no-repeat;
+  background-size: contain;
+  margin: -6rpx 45rpx 0 15rpx;
+}
+
+.nearshop_phone {
+  display: block;
+  height: 125rpx;
+  width: 100%;
+}
+
+.nearshop_phone .nearshop_text {
+  display: block;
+  font-size: 24rpx;
+  color: #c6c6c6;
+  line-height: 30rpx;
+  padding-top: 36rpx;
+}
+
+.nearshop_phone .nearshop_num {
+  font-size: 30rpx;
+  color: #515151;
+  margin-top: 10rpx;
+}
+
+.nearshop_but {
+  position: absolute;
+  right: 35rpx;
+  bottom: 35rpx;
+  border: 4rpx solid #FCE8E8;
+  border-radius: 200rpx;
+  width: 187rpx;
+  height: 74rpx;
+  line-height: 68rpx;
+  font-size: 28rpx;
+  color: #FB2F2E;
+  text-align: center;
+  display: block;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.nonearshop {
+  text-align: center;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  color: #888;
+}

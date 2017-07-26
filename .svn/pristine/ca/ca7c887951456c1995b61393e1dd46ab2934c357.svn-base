@@ -1,0 +1,121 @@
+<!--pages/balances/balances.wxml-->
+<import src='../common-template/alert-screen-template/alert-screen-template.wxml' />
+
+<view class='current-time'>
+  <text class='red'>
+    付款剩余时间：23小时34分45秒
+  </text>
+</view>
+
+
+<view class='address-top-items'>
+
+  <image class='bar-bg' src="../assets/images/balance_bar.png"></image>
+
+  <view class='order-info-desc'>
+    <image class='y-order-icon' src="../assets/images/y_order_icon.png"></image>
+
+    <view class='colunm'>
+      <text>订单编号：{{orderDetails.sn}}</text>
+      <text>订单日期：{{orderDetails.createDate}}</text>
+      <view>
+        <text>订单状态：</text>
+        
+        <text style='color: #f48200' wx:if="{{orderDetails.paymentStatus == 10 && !orderDetails.expired}}">待付款</text>
+            <text style='color: #f48200' wx:if="{{orderDetails.paymentStatus == 10 && orderDetails.expired}}">已过期</text>
+            <text style='color: #f48200' wx:if="{{orderDetails.paymentStatus == 60 }}">已取消</text>
+            <text style='color: #f48200' wx:if="{{orderDetails.paymentStatus == 50 && orderDetails.auditResult == 2}}">已关闭</text>
+            <text style='color: #f48200' wx:if="{{orderDetails.paymentStatus == 50 && item.auditResult != 2}}">已退款</text>
+            <text style='color: #f48200' wx:if="{{orderDetails.paymentStatus == 40 || orderDetails.paymentStatus == 51}}">待收货</text>
+            <text style='color: #f48200' wx:if="{{(orderDetails.paymentStatus == 40 || item.paymentStatus == 51) && orderDetails.orderStatusSign == 40}}">已收货</text>
+      </view>
+    </view>
+  </view>
+
+
+  <view class='order-info-desc' style='border-bottom: none'>
+    <image class='y-order-icon' src="../assets/images/y_dingwei.png"></image>
+    <view class='yes-address'>
+      <view class='items-per-num'>
+        <text>收货人：{{orderDetails.consignee}}</text>
+        <text>{{orderDetails.phone}}</text>
+      </view>
+      <view class='detail-address'>
+        <text>地址：</text>
+        <text>{{orderDetails.areaName}}</text>
+      </view>
+    </view>
+  </view>
+  <image class='bar-bg' src="../assets/images/balance_bar.png"></image>
+</view>
+
+
+<view class='shop-container'>
+<view class="classname" wx:for="{{businessList}}" wx:for-item="item" wx:for-index="index">
+  <view class='goods-tit'>{{item.orgName}}</view>
+  <view>
+   
+    <view class="item-up" wx:for="{{businessList[index].orderItemVos}}" wx:for-item="item2" wx:for-index="index2">
+    <navigator url="../details/details?id={{item2.spuId}}" class="navigator_details">
+      <image class="goods-img" src="{{item2.thumbnail}}"></image>
+      <view class="item-right-desc">
+        <text class='tt'>{{item2.name}}</text>
+        <view class="color-size">
+          <text>{{item.valueColor}}</text>
+          <text>{{item.valueSize}}</text>
+          <text>x{{item2.quantity}}</text>
+        </view>
+        <text>¥{{item2.buyPrice}}</text>
+        <view wx:if="{{item.orderStatusSign == 40}}" class='wuliu-btn'>查看物流</view>
+      </view>
+       </navigator>
+    </view>
+  
+  </view>
+</view>
+  <view class='common-bar-flag'>
+    <text>留言备注：</text>
+    <text>检查鞋子是否有问题</text>
+   <!--  <input class='inp' type="text" placeholder="选填:对本次交易的说明备注" /> -->
+  </view>
+  <view class='xj-total-count'>
+      <text style='padding-right: 60rpx'>小计：￥{{orderDetails.factPayFee}}</text>
+      <text>已优惠：￥183</text>
+  </view>  
+</view>
+
+
+
+<view class='special-flag-barx'>
+  <view style='font-size: 28rpx;color: #9a9a9a;'>关于售后：</view>
+  <view class='rows-area'>
+    <text style='font-size: 26rpx;color: #9a9a9a;width: 432rpx;'>
+      亲爱的用户，如果您对购买的商品，无论发货时效，商品质量，商品本身有任何疑问，需要进行退货、退款处理，可以关注右侧二维码‘爱拍客商城’公众号直接进行操作~
+    </text>
+     <image id='wc-pic' src="../assets/images/y_erwm.png"></image>
+  </view>
+</view>
+
+<view class='total-desc-flag' style='margin-bottom: 0;padding-bottom: 26rpx;'>
+  <text>商品金额：￥{{orderDetails.factPayFee}}</text>
+  <text>运费：￥10</text>
+  <text>优惠券：－￥100</text>
+</view>
+
+<view class='common-bar-flag count-bar clearfix' style='margin-bottom: 128rpx;border-top: 1px solid #f2f2f2;'>
+  <text class='fan'>返</text>
+  <view style='display: inline-block;vertical-align: middle;'>
+    <text>本单可返利：</text>
+    <text class='red' style='font-size: 28rpx;'>¥65</text>
+  </view>
+  <image class='wh-icon' src="../assets/images/wh_icon.png"></image>
+</view>
+
+<view class='balance-footer-bar'>
+  <text class='red'>应付金额：￥{{orderDetails.factPayFee}}</text>
+  <button bindtap="payforNow" data-sn="{{orderDetails.sn}}">微信支付</button>
+</view>
+<view wx:if='{{false}}'>
+  <template is='alert-screen-template'></template>
+</view>
+<view id='app-mask' wx:if='{{false}}'></view>

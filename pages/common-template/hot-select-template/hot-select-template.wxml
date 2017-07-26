@@ -1,0 +1,6 @@
+<!--搜索的热搜的布局-->
+<template name="hot-select-template">
+ <view class="hot-bar">
+   <view class="hot-desc">{{item}}</view>
+ </view>
+</template>

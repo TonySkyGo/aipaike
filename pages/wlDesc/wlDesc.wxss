@@ -1,0 +1,57 @@
+/* pages/wlDesc/wlDesc.wxss */
+
+.item-up {
+    margin:24rpx 0;
+    padding: 23rpx 40rpx;
+    box-sizing: border-box;
+}
+.item-up .goods-img {
+  width: 171rpx;
+  height: 171rpx;
+  border: 1px solid #f4f4f4;
+}
+
+.item-up {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #f2f2f2;
+  
+}
+
+.item-up .item-right-desc {
+  padding-left: 32rpx;
+  font-size: 26rpx;
+  vertical-align: top;
+  height: 140rpx;
+  color: #989898;
+  width: 450rpx;
+  position: relative;
+}
+
+.item-up .item-right-desc .tt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  height: 37rpx;
+}
+
+.item-right-desc view{
+    margin-bottom: 5rpx;
+}
+
+.wl-desc-info{
+    background: #fff;
+    margin-top: 26rpx;
+}
+
+.wl-desc-info{
+    padding: 26rpx 40rpx;
+    box-sizing: border-box;
+}
+
+.wl-desc-info .wl-title{
+    color: #2e2e2e;
+    font-size: 28rpx;
+}

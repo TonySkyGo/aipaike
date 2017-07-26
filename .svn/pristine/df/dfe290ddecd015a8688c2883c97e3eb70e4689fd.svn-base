@@ -1,0 +1,237 @@
+<view class="comprehensive">
+  <view class="comprehensive_left">
+    <view class="comprehensive_txt">
+      综合评分
+    </view>
+    <view class="comprehensive_num">
+      {{averageScore}}
+    </view>
+    <view class="comprehensive_start">
+     <image class="start_img"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+    </view>
+  </view>
+  <view class="comprehensive_right">
+    <view class="comprehensive_details">
+      <view class="describe">
+        描述相符
+      </view>
+      <view class="comprehensive_start">
+     <image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+    </view>
+    <view class="comprehensive_right_num">
+     {{productScore}}
+    </view>
+    </view>
+    <view class="comprehensive_details">
+      <view class="describe">
+        服务态度
+      </view>
+      <view class="comprehensive_start">
+     <image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+    </view>
+    <view class="comprehensive_right_num">
+      {{serviceScore}}
+    </view>
+    </view>
+    <view class="comprehensive_details">
+      <view class="describe">
+        物流速度
+      </view>
+      <view class="comprehensive_start">
+     <image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+<image class="start_img_small"
+src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WnSATsf2AAADbxm2Gco979.png"></image>
+    </view>
+    <view class="comprehensive_right_num">
+      {{shippingScore}}
+    </view>
+    </view>
+  </view>
+</view>
+<view class="evaluate_list">
+  <view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">好评</view>  
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">中评</view>  
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">差评</view>
+    <view class="swiper-tab-list {{currentTab==4 ? 'on' : ''}}" data-current="4" bindtap="swichNav">有图</view>  
+    
+</view>  
+  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">  
+    <!-- 全部 -->  
+    <swiper-item>
+     <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+      <view class="evaluate_list_pj" wx:for="{{evaluateAll}}" wx:for-index="index">
+         <view class="evaluate_alone">
+            <view class="evaluate_portrait">
+              <view class="portrait_img"></view>
+              <view class="user_name">{{item.userName}}</view>
+            </view>
+         <view class="evaluate_details">
+            <view class="evaluate_txt">
+              {{item.content}}
+            </view>
+            <view class="colorandsize">
+            <view class="evaluate_color">颜色：{{item.color}}</view>
+            <view class="evaluate_color">尺码：{{item.size}}</view>
+            <view class="evaluate_creatTime">{{item.createDate}}</view>
+          </view>
+          <view class="evaluate_img {{item.image1 == null ? 'disnone' : ''}}">
+              <image class="img_get" src="{{item.image1}}"></image>
+               <image class="img_get" src="{{item.image2}}"></image>
+                <image class="img_get" src="{{item.image3}}"></image>
+          </view>
+         </view> 
+       </view> 
+      </view>  
+      </scroll-view>
+    </swiper-item>  
+    <!-- 好评 -->  
+    <swiper-item>  
+       <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+      <view class="evaluate_list_pj" wx:for="{{evaluateWell}}" wx:for-index="index">
+         <view class="evaluate_alone">
+            <view class="evaluate_portrait">
+              <view class="portrait_img"></view>
+              <view class="user_name">{{item.userName}}</view>
+            </view>
+         <view class="evaluate_details">
+            <view class="evaluate_txt">
+              {{item.content}}
+            </view>
+            <view class="colorandsize">
+            <view class="evaluate_color">颜色：{{item.color}}</view>
+            <view class="evaluate_color">尺码：{{item.size}}</view>
+            <view class="evaluate_color">{{item.createDate}}</view>
+          </view>
+         <view class="evaluate_img {{item.image1 == null ? 'disnone' : ''}}">
+              <image class="img_get" src="{{item.image1}}"></image>
+               <image class="img_get" src="{{item.image2}}"></image>
+                <image class="img_get" src="{{item.image3}}"></image>
+          </view>
+         </view> 
+       </view> 
+      </view>  
+      </scroll-view>  
+    </swiper-item>  
+    <!-- 中评-->  
+    <swiper-item>  
+       <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+      <view class="evaluate_list_pj" wx:for="{{evaluateSo}}" wx:for-index="index">
+         <view class="evaluate_alone">
+            <view class="evaluate_portrait">
+              <view class="portrait_img"></view>
+              <view class="user_name">{{item.userName}}</view>
+            </view>
+         <view class="evaluate_details">
+            <view class="evaluate_txt">
+              {{item.content}}
+            </view>
+            <view class="colorandsize">
+            <view class="evaluate_color">颜色：{{item.color}}</view>
+            <view class="evaluate_color">尺码：{{item.size}}</view>
+            <view class="evaluate_color">{{item.createDate}}</view>
+          </view>
+         <view class="evaluate_img {{item.image1 == null ? 'disnone' : ''}}">
+              <image class="img_get" src="{{item.image1}}"></image>
+               <image class="img_get" src="{{item.image2}}"></image>
+                <image class="img_get" src="{{item.image3}}"></image>
+          </view>
+         </view> 
+       </view> 
+      </view>  
+      </scroll-view> 
+    </swiper-item> 
+
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+      <view class="evaluate_list_pj" wx:for="{{evaluateBad}}" wx:for-index="index">
+         <view class="evaluate_alone">
+            <view class="evaluate_portrait">
+              <view class="portrait_img"></view>
+              <view class="user_name">{{item.userName}}</view>
+            </view>
+         <view class="evaluate_details">
+            <view class="evaluate_txt">
+              {{item.content}}
+            </view>
+            <view class="colorandsize">
+            <view class="evaluate_color">颜色：{{item.color}}</view>
+            <view class="evaluate_color">尺码：{{item.size}}</view>
+            <view class="evaluate_color">{{item.createDate}}</view>
+          </view>
+         <view class="evaluate_img {{item.image1 == null ? 'disnone' : ''}}">
+              <image class="img_get" src="{{item.image1}}"></image>
+               <image class="img_get" src="{{item.image2}}"></image>
+                <image class="img_get" src="{{item.image3}}"></image>
+          </view>
+         </view> 
+       </view> 
+      </view>  
+      </scroll-view> 
+    </swiper-item> 
+
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+      <view class="evaluate_list_pj" wx:for="{{evaluatePic}}" wx:for-index="index">
+         <view class="evaluate_alone">
+            <view class="evaluate_portrait">
+              <view class="portrait_img"></view>
+              <view class="user_name">{{item.userName}}</view>
+            </view>
+         <view class="evaluate_details">
+            <view class="evaluate_txt">
+              {{item.content}}
+            </view>
+            <view class="colorandsize">
+            <view class="evaluate_color">颜色：{{item.color}}</view>
+            <view class="evaluate_color">尺码：{{item.size}}</view>
+            <view class="evaluate_color">{{item.createDate}}</view>
+          </view>
+         <view class="evaluate_img {{item.image1 == null ? 'disnone' : ''}}">
+              <image class="img_get" src="{{item.image1}}"></image>
+               <image class="img_get" src="{{item.image2}}"></image>
+                <image class="img_get" src="{{item.image3}}"></image>
+          </view>
+         </view> 
+       </view> 
+      </view>  
+      </scroll-view> 
+    </swiper-item>  
+</swiper>  
+</view>

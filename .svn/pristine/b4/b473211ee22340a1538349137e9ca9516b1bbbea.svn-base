@@ -1,0 +1,168 @@
+<!--pages/shopCarts/shopCarts.wxml-->
+<view class="main">
+  <view class='cart-container-father' wx:if="{{cartVo.totalQuantity > 0}}">
+    <!--单个商户开始-->
+    <!-- wx:for="{{cartGroupVos}}" -->
+    <view class="cart-container" wx:for="{{cartVo.cartGroupVos}}" wx:for-index="indexGroup" wx:for-item="item">
+      <!--标题-->
+
+      <view class="cart-title-wrap">
+        <view catchtap='cartGroupCheck' data-flag="{{currentFlag}}" data-orgid="{{item.orgId}}">
+          <icon wx:if="{{item.checked == true}}" type="success" size="16" color="red" class="cart-pro-select" />
+          <icon wx:else type="circle" size="16" class="cart-pro-select" />
+        </view>
+        <text class="zy">品牌直营</text>
+        <text class="sh">{{item.orgName}}</text>
+      </view>
+
+
+      <!--有促销开始-->
+      <view class="goods-grop" wx:for="{{item.promotionVos}}" wx:for-item="i" wx:for-index="idxGroup">
+        <!--有促销信息开始-->
+        <view class="title-hd">
+          <text class="hd-flag">{{i.simpleTitle}}</text>
+          <text>{{i.title}}</text>
+        </view>
+        <!--有促销信息结束-->
+
+        <!--有促销商品容器开始-->
+        <view class="cart-item-container">
+          <!--每个商品项开始-->
+          <view class="cart-item" wx:for="{{i.cartItemVos}}" wx:for-item='j'>
+            <!--每个商品上层开始-->
+
+         <!--    <view class="item-up" style='{{j.txtStyle}}' catchtouchstart="touchS"  catchtouchend="touchE" data-index="{{index}}" data-idx="{{idxGroup}}" data-group="{{indexGroup}}"> -->
+
+            <view class="item-up">
+              <view catchtap='gCartsFn' data-cartid="{{j.cartItemId}}" data-flag="{{currentFlag}}">
+                <icon wx:if="{{j.checked == true && j.stock >0 && j.marketable == true}}" type="success" color="red" size="16" class="cart-pro-select" />
+                <icon wx:else type="circle" size="16" class="cart-pro-select" />
+              </view>
+              <navigator url="../details/details?id={{j.goodsId}}" style='display: flex;' hover-class="none">
+                <view style='width: 140rpx;height:140rpx;position: relative;'>
+                  <image class="goods-img" src="{{j.productThumbnail}}"></image>
+                  <text wx:if="{{!j.marketable}}" style='position: absolute;left: 0;bottom:0;text-align: center;width: 140rpx;height: 34rpx;line-height:34rpx;background: #bbbbbb;color: #fff;font-size: 20rpx;'>已下架</text>
+                  <text wx:elif="{{j.stock == 0}}" style='position: absolute;left: 0;bottom:0;text-align: center;width: 140rpx;height: 34rpx;line-height:34rpx;background: #bbbbbb;color: #fff;font-size: 20rpx;'>无库存</text>
+                </view>
+                <view class="item-right-desc">
+                  <text class='goods-bt'>{{j.productGoodsName}}</text>
+
+                  <view class="color-size">
+                    <block wx:for="{{j.specificationValueVos}}" wx:for-item="k">
+                      <text>{{k.specificationName}}:{{k.specificationValueName}}</text>
+                    </block>
+                  </view>
+                  <text>¥{{j.showPrice}}</text>
+                </view>
+              </navigator>
+              <!--增加减少开始-->
+              <view class="cart-count-box" >
+                <text  wx:if="{{j.quantity == 1}}" class="cart-count-down" catchtouchstart="reduseCount" data-quantity="{{j.quantity}}" data-cartd="{{j.cartItemId}}">-</text>
+                <text  wx:else class="cart-count-down cart-redius" catchtouchstart="reduseCount" data-quantity="{{j.quantity}}" data-cartd="{{j.cartItemId}}">-</text>
+                <text class="cart-count-num">{{j.quantity}}</text>
+                <text class="cart-count-add" catchtouchstart="addCount" data-quantity="{{j.quantity}}" data-cartd="{{j.cartItemId}}">+</text>
+              </view>
+              <!--增加减少结束-->
+            </view>
+            <!--每个商品的上层结束-->
+            <!--每个商品右边删除开始-->
+            <view class="item-down" catchtouchstart='delCartItem'>删除</view>
+            <!--每个商品右边删除结束-->
+          </view>
+          <!--每个商品项结束-->
+        </view>
+        <!--有促销总的商品容器结束-->
+      </view>
+      <!--有促销结束-->
+
+      <!--没有促销商品开始cartVo.cartGroupVos.cartItemVos-->
+      <view class="no-promotion">
+        <!--没有促销 总的商品容器开始-->
+        <view class="cart-item-container">
+          <!--每个商品项开始-->
+          <view class="cart-item"  wx:for="{{item.cartItemVos}}" wx:for-item="l">
+
+            <!--每个商品上层开始-->
+           <!--  <view class="item-up" style="{{l.txtStyle}}" data-index="{{index}}" data-group="{{indexGroup}}"  catchtouchstart="touchS" catchtouchend="touchE"> -->
+            <view class="item-up">
+              <view catchtouchstart='gCartsFn' data-cartid="{{l.cartItemId}}" data-flag="{{currentFlag}}">
+                <icon wx:if="{{l.checked == true && l.stock >0 && l.marketable == true}}" type="success" color="red" size="16" class="cart-pro-select" />
+                <icon wx:else type="circle" size="16" class="cart-pro-select" />
+              </view>
+              <navigator url="../details/details?id={{l.goodsId}}" style='display: flex;' hover-class="none">
+                <view style='width: 140rpx;height:140rpx;position: relative;'>
+                  <image class='goods-img' src="{{l.productThumbnail}}"></image>
+                  <text wx:if="{{!l.marketable}}" style='position: absolute;left: 0;bottom:0;text-align: center;width: 140rpx;height: 34rpx;line-height:34rpx;background: #bbbbbb;color: #fff;font-size: 20rpx;'>已下架</text>
+                  <text wx:elif="{{l.stock == 0}}" style='position: absolute;left: 0;bottom:0;text-align: center;width: 140rpx;height: 34rpx;line-height:34rpx;background: #bbbbbb;color: #fff;font-size: 20rpx;'>无库存</text>
+                </view>
+
+                <view class="item-right-desc">
+                  <text class='goods-bt'>{{l.productGoodsName}}</text>
+                  <view class="color-size">
+                    <block wx:for="{{l.specificationValueVos}}" wx:for-item="m">
+                      <text>{{m.specificationName}}:{{m.specificationValueName}}</text>
+                    </block>
+                  </view>
+                  <text>¥{{l.showPrice}}</text>
+                </view>
+              </navigator>
+
+              <!--增加减少开始-->
+              <view class="cart-count-box">
+                <text wx:if="{{l.quantity == 1}}" class="cart-count-down" catchtouchstart="reduseCount" data-quantity="{{l.quantity}}" data-cartd="{{l.cartItemId}}">-</text>
+
+                <text wx:else class="cart-count-down cart-redius" catchtouchstart="reduseCount" data-quantity="{{l.quantity}}" data-cartd="{{l.cartItemId}}">-</text>
+
+                <text class="cart-count-num">{{l.quantity}}</text>
+                <text class="cart-count-add" catchtouchstart="addCount" data-quantity="{{l.quantity}}" data-cartd="{{l.cartItemId}}">+</text>
+              </view>
+              <!--增加减少结束-->
+            </view>
+            <!--每个商品的上层结束-->
+            <!--每个商品右边删除开始-->
+            <view class="item-down" style='position: absolute;right:0;top:0;z-index: 10' bindtap="delCartItem" data-cartid="{{l.cartItemId}}">删除</view>
+            <!--每个商品右边删除结束-->
+          </view>
+          <!--每个商品项结束-->
+        </view>
+        <!--没有促销总的商品容器结束-->
+      </view>
+      <!--没有促销商品结束-->
+    </view>
+    <!-- 单个商务结束 -->
+
+    <!-- 底部栏开始 -->
+    <view class="cart-footer">
+      <view class='items-one' catchtap='selectAllFn' data-flag='{{currentFlag}}'>
+        <icon wx:if="{{cartVo.checked}}" type="success" size="16" color="red" class="total-select" />
+        <icon wx:elif="{{!cartVo.checked}}" type="circle" size="16" class="total-select" />
+        <text>全选</text>
+      </view>
+      <view class='items-two'>
+        <view class='items-two-one'>
+          <text class='flag-one'>合计：</text>
+          <text>￥{{cartVo.totalPrice}}</text>
+        </view>
+        <view class='items-two-two'>
+          <text>总额：￥{{cartVo.totalPrice+cartVo.totalDisAmount}}</text>
+          <text> 优惠¥{{cartVo.totalDisAmount}}</text>
+        </view>
+      </view>
+      <view class='items-thr'>
+        <text class="goTo-btn" bindtap="buyAndSettlement">去结算</text>
+      </view>
+    </view>
+  </view>
+  <!-- 购物车有数据结束 -->
+
+  <!-- 购物车为空 -->
+  <view wx:elif="{{cartVo.totalQuantity == 0}}">
+    <image src="../assets/images/emp_xxsd.png" style='display: block;width: 276rpx;height:267rpx;margin: 0 auto 60rpx; padding-top: 140rpx;'></image>
+    
+        <view class="cart-no-data" style='text-align: center;color: #959595;'>购物车空空的，去首页逛逛吧~ ~</view>
+    
+      <navigator url="../index/index" hover-class="none">
+    <view style='width: 302rpx;height:70rpx;line-height: 70rpx;background: #fb2f2e;font-size: 28rpx;text-align: center;color: #fff;margin: 40rpx auto 0;border-radius: 8rpx;'>去逛逛</view>
+     </navigator>
+  </view>
+</view>

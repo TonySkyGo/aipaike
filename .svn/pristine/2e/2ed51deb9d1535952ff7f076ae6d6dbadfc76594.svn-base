@@ -1,0 +1,109 @@
+.category {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-top: 2rpx solid #F6F6F6;
+}
+.swiper-tab{  
+    width: 24%;  
+    line-height: 66rpx;
+    background: #f2f2f2;
+    height: 100%;
+    overflow: hidden;
+    }  
+.swiper-tab-list{  
+    font-size: 28rpx;  
+    width: 100%;  
+    color: #333;  
+    padding-left: 34rpx;
+}  
+.on{ 
+      background: #fff;
+}   
+.swiper-box{ 
+  display: block; 
+  height: 100%; 
+  width: 76%;
+  overflow: hidden;
+  background: #fff;
+}  
+
+.cate-list {
+  display: block; 
+  width: 520rpx;
+  margin: 34rpx 0 30rpx 25rpx;
+}
+
+.cate-image image {
+  width: 520rpx;
+}
+
+.cate-title {
+  width: 100%;
+  background: url(http://img.aipaike.com/group1/M00/10/31/Cvv7ZVlLlguAeqX1AAAc7aMTo7I939.jpg) no-repeat;
+  height: 63rpx;
+  background-size: contain;  
+  margin: 25rpx auto 30rpx;
+}
+
+.cate-child {
+  width:520rpx;
+}
+
+.cate-child-list {
+  float: left;
+  width: 33.33%;
+  overflow: hidden;
+  margin-bottom: 22rpx;
+}
+
+.cate-child-list navigator {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.cate-child-image image {
+  width: 100%;
+}
+
+.cate-child-name {
+  font-size: 26rpx;
+  color: #4d4d4d;
+  text-align: center;
+  line-height: 30rpx;
+}
+
+.cate-brand-title {
+  font-size: 28rpx;
+  color: #3a3a3a;
+  line-height: 40rpx;
+  margin-top: 26rpx;
+  margin-bottom: 20rpx;
+}
+
+
+.cate-brand-title icon {
+  background: #FF6F07;
+  float: left;
+  margin: 6rpx 8rpx 0 0;
+  width: 4rpx; 
+  height: 28rpx;
+}
+
+.cate-brand-child {
+  width: 544rpx;
+}
+
+.cate-brand-child-list {
+  float: left;
+  width: 248rpx;
+  height: 112rpx;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+  margin-right: 24rpx;
+}
+
+.cate-brand-child-list image {
+  width: 248rpx;
+  height: 112rpx;
+}

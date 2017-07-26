@@ -1,0 +1,49 @@
+<!--pages/gladdress/gladdress.wxml-->
+<navigator url='../address/address'>
+    <view class='gladdress-title'>
+      <image class='dw_icon' src="../assets/images/y_dingwei.png"></image>
+      <text class='text'>添加收货地址</text>
+      <image class='y-right' src="../assets/images/y_right.png"></image>
+    </view>
+</navigator>
+
+<!-- selected-border -->
+<view class='flag-address {{item.isDefault ? "selected-border" : ""}}' wx:for="{{listAdderssArr}}" style='margin-bottom: 30rpx;'>
+  <view class='yes-address'>
+    <view class='items-per-num'>
+      <text>收货人：{{item.consignee}}</text>
+      <text>联系电话：{{item.phone}}</text>
+    </view>
+    <view class='detail-address'>
+      <text>地址：</text>
+      <text>{{item.areaName}}{{item.address}}</text>
+    </view>
+  </view>
+
+  <view class='mr-bar'>
+    <view class='items-flag'>
+
+      <view wx:if='{{item.isDefault}}'>
+        <icon  type="success" size="16" color="red" style='vertical-align: middle;'/>
+        <text  style='vertical-align: middle;padding-left: 20rpx;'>设为默认</text>
+      </view>
+      
+      <view wx:elif="{{!item.isDefault}}" catchtap='isDefaultAddressFn' data-consignee="{{item.consignee}}" data-areaid="{{item.areaId}}" data-address="{{item.address}}" data-zipcode="{{item.zipCode}}" data-phone="{{item.phone}}" data-isdefault="true" data-id='{{item.receiverId}}'>
+          <icon type="circle" size="16" style='vertical-align: middle;' />
+          <text style='vertical-align: middle;padding-left: 20rpx;'>设为默认</text>
+      </view>
+
+    </view>
+
+    <view class='items-flag' catchtap='editAddressFn'>
+      <image style='width: 33rpx;height:31rpx;vertical-align: top;padding:5rpx 10rpx 0 0;' src="../assets/images/abc_edit.png"></image>
+      <text>编辑</text>
+    </view>
+    <view class='items-flag' catchtap='delAddressFn' data-id='{{item.receiverId}}'>
+      <image style='width:31rpx;height:32rpx;vertical-align: top;padding:5rpx 10rpx 0 0;' src="../assets/images/y_icon_del.png"></image>
+      <text>删除</text>
+    </view>
+  </view>
+</view>
+
+

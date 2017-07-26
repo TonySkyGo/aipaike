@@ -1,0 +1,88 @@
+<!--pages/balances/balances.wxml-->
+<import src='../common-template/alert-screen-template/alert-screen-template.wxml' />
+
+<view class='address-top-items'>
+
+  <image class='bar-bg' src="../assets/images/balance_bar.png"></image>
+
+  <view class='no-address' bindtap="addAddressFun">
+    <text>请填写您的收货地址</text>
+    <!--<image class='y-right' src="../assets/images/y_right.png"></image>-->
+  </view>
+
+
+  <view class='yes-address' >
+    <view class='items-per-num'>
+      <text>收货人：{{consignee}}</text>
+      <text>联系电话：{{phone}}</text>
+    </view>
+    <view class='detail-address'>
+      <text>地址：</text>
+      <text>{{areaName}}{{address}}</text>
+    </view>
+    <image class='y-right' src="../assets/images/y_right.png"></image>
+  </view>
+  <image class='bar-bg' src="../assets/images/balance_bar.png"></image>
+</view>
+
+
+<view class='shop-container'>
+<view class="classname" wx:for="{{oderList}}" wx:for-item="item" wx:for-index="index">
+  <view class='goods-tit'>{{item.orgName}}</view>
+  <view wx:for="{{oderList[index].orderItems}}" wx:for-item="item2" wx:for-index="index2">
+  <navigator url="../details/details?id={{item2.goodsId}}" class="navigator_details">
+    <view class="item-up">
+      <image class="goods-img" src="{{item2.thumbnailFull}}"></image>
+      <view class="item-right-desc">
+        <text class='tt'>{{item2.name}}</text>
+        <view class="color-size">
+          <text>{{item2.productSpecificationVos[0].value}}</text>
+          <text>{{item2.productSpecificationVos[1].value}}</text>
+          <text>x{{item2.quantity}}</text>
+        </view>
+        <text>¥{{item2.buyPrice}}</text>
+      </view>
+    </view>
+   </navigator>
+  </view>
+</view>
+  <view class='common-bar-flag'>
+      <text>配送方式：EMS速递</text>
+  </view>
+
+  <view class='common-bar-flag'>
+      <text>留言备注：</text>
+      <input class='inp' value="{{remarkMessage}}" type="text" placeholder="选填:对本次交易的说明备注" />
+  </view>
+</view>
+
+<view class='common-bar-flag count-bar clearfix' bindtap="choseCoupon">
+      <text style='padding-top: 6rpx;'>优惠券：</text>
+      <view style='float: right'>
+        <text style='vertical-align: middle;'>已使用<text class='red'>{{choseCouponList.length}}</text>张 抵扣<text class='red'>{{deductibleFee}}</text>元 </text>
+        <image class='y-right' src="../assets/images/y_right.png"></image>
+      </view>
+</view>
+
+<view class='common-bar-flag count-bar clearfix'>
+    <text class='fan'>返</text>    
+    <view style='display: inline-block;vertical-align: middle;'>
+        <text>本单可返利：</text>
+        <text class='red' style='font-size: 28rpx;'>¥{{maxRebateValue}}</text> 
+    </view>
+    <image class='wh-icon' src="../assets/images/wh_icon.png" bindtap="alertDetails"></image>
+</view>
+
+<view class='total-desc-flag'>
+    <text>商品金额：￥{{priceMarket}}</text>
+    <text>运费：￥{{freightFee}}</text>
+    <text>优惠券：－￥{{couponPrice}}</text>
+</view>
+
+<view class='balance-footer-bar'>
+    <text class='red'>应付金额：￥{{orderAmount}}</text>
+    <button size='20' class="weixinpayfor" bindtap="payforNow" style="background:#FB2F2E;color:#fff">微信支付</button>
+</view>
+
+<template is="{{alertName}}" data="{{alertName,alertMask}};"></template>
+<view id="app-mask" style="display:{{alertMask}}"></view>

@@ -1,0 +1,73 @@
+<view class="category">
+<view class="swiper-tab">  
+    <view bindtap="swichNav"  wx:for="{{listDataCategory}}"  wx:for-item="item" wx:for-index="idx" class="swiper-tab-list {{currentTab==idx ? 'on' : ''}}" data-current="{{idx}}">{{item.name}}</view>   
+</view>  
+  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300"  style="height:{{winHeight-30}}px" bindchange="bindChange"> 
+    <swiper-item class="cate-list">
+      <scroll-view scroll-y="true" style="height:{{winHeight-30}}px">
+          <view class="cate-image">
+              <image src="{{listDataBrandImage}}" mode="widthFix"></image>
+          </view>
+          <view class="cate-brand-title"><icon />鞋类品牌</view>
+          <view class="cate-brand-child" wx:for="{{listDataBrand}}" wx:for-item="item">
+              <navigator url="../searchs/searchs?keyword={{child.name}}" class="cate-brand-child-list">
+              <view>
+                <image src="{{item.image}}" mode="widthFix"></image>
+              </view> 
+              </navigator>
+          </view>
+      </scroll-view> 
+    </swiper-item> 
+    <!-- 未使用 -->  
+    <swiper-item class="cate-list" wx:for="{{listDataCategory}}"  wx:for-item="item" wx:for-index="idx" wx:if="{{idx > 0}}">  
+      <scroll-view scroll-y="true" style="height:{{winHeight-30}}px">
+          <view class="cate-image">
+              <image src="{{item.image}}" mode="widthFix"></image>
+          </view>
+          <view class="cate-title"></view>
+          <view class="cate-child">
+            <view class="cate-child-list" wx:if="{{idx == 1}}" wx:for="{{listDataCategoryChild1}}"  wx:for-item="child">
+              <navigator url="../searchs/searchs?keyword={{child.name}}">
+                <view class="cate-child-image">
+                  <image src="{{child.image}}" mode="widthFix"></image>
+                </view> 
+                <view class="cate-child-name">{{child.name}}</view>
+              </navigator> 
+            </view>
+
+            <view class="cate-child-list" wx:if="{{idx == 2}}" wx:for="{{listDataCategoryChild2}}"  wx:for-item="child">
+              <navigator url="../searchs/searchs?keyword={{child.name}}">
+                <view class="cate-child-image">
+                  <image src="{{child.image}}" mode="widthFix"></image>
+                </view> 
+                <view class="cate-child-name">{{child.name}}</view>
+              </navigator> 
+            </view>
+
+            <view class="cate-child-list" wx:if="{{idx == 3}}" wx:for="{{listDataCategoryChild3}}"  wx:for-item="child">
+              <navigator url="../searchs/searchs?keyword={{child.name}}">
+                <view class="cate-child-image">
+                  <image src="{{child.image}}" mode="widthFix"></image>
+                </view> 
+                <view class="cate-child-name">{{child.name}}</view>
+              </navigator> 
+            </view>
+
+            <view class="cate-child-list" wx:if="{{idx == 4}}" wx:for="{{listDataCategoryChild4}}"  wx:for-item="child">
+              <navigator url="../searchs/searchs?keyword={{child.name}}">
+                <view class="cate-child-image">
+                  <image src="{{child.image}}" mode="widthFix"></image>
+                </view> 
+                <view class="cate-child-name">{{child.name}}</view>
+              </navigator> 
+            </view>
+
+
+          </view>
+      </scroll-view>  
+    </swiper-item>  
+    <!-- 已使用 -->  
+      
+</swiper>  
+</view>

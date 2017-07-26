@@ -1,0 +1,295 @@
+/* pages/shopCarts/shopCarts.wxss */
+page{
+  background:#f4f4f4;
+}
+
+.cart-container {
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.cart-title-wrap {
+  height: 94rpx;
+  border-bottom: 1px solid #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cart-pro-select {
+  padding-left: 40rpx;
+}
+
+.cart-title-wrap icon {
+  padding-right: 18rpx;
+}
+
+.title-hd {
+  padding-left: 40rpx;
+  padding-bottom: 13rpx;
+  font-size: 24rpx;
+  color: #000;
+}
+
+.title-hd .hd-flag {
+  border: 1px solid #fc4241;
+  border-radius: 4px;
+  color: #fc4241;
+  margin-right: 18rpx;
+  padding: 2rpx 10rpx;
+}
+
+.cart-title-wrap .zy {
+  font-size: 22rpx;
+  color: #fff;
+  background: #000;
+  border-radius: 4rpx;
+  padding: 2rpx 6rpx;
+}
+
+.cart-title-wrap .sh {
+  font-size: 30rpx;
+  color: #5d5d5d;
+  padding-left: 18rpx;
+}
+
+.goods-grop {
+  padding: 35rpx 0 0;
+}
+
+.item-up .goods-img {
+  width: 140rpx;
+  height: 140rpx;
+  border: 1px solid #f4f4f4;
+}
+
+.cart-item {
+  position: relative;
+  height: 242rpx;
+  width: 750rpx;
+  background: #fff;
+}
+
+.cart-item-container .cart-item+.cart-item {
+  border-top: 1px solid #f2f2f2;
+}
+
+.item-up {
+  width: 750rpx;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #fff;
+  height: 242rpx;
+  align-items:center;
+  z-index:12;
+
+}
+
+.item-up .cart-pro-select {
+  vertical-align: middle;
+}
+
+.cart-item .item-down {
+width:72rpx;
+height:60rpx;
+position:absolute;
+right:2%;
+top:38%;
+z-index:100;
+
+
+}
+
+.cart-item .item-down image{
+  width: 31rpx;
+  height: 32rpx;
+  float: right;
+  margin-right: 20rpx;
+}
+
+.item-up .cart-pro-select {
+  padding-right: 28rpx;
+}
+
+.item-right-desc {
+  padding-left: 22rpx;
+  font-size: 26rpx;
+  vertical-align: top;
+  height: 140rpx;
+  width:400rpx;
+}
+
+.cart-count-box {
+  position: absolute;
+  right: 19rpx;
+  bottom: 27rpx;
+  height: 60rpx;
+}
+
+.goods-grop .cart-item-container{
+  border-bottom:1px solid red;
+}
+
+.color-size{
+  color: #828282;
+  font-size: 24rpx;
+  margin: 12rpx 0;
+}
+
+.color-size text{
+  padding-right:26rpx;
+}
+
+/*购物车增加减少的css*/
+
+.cart-count-box {
+  /*position: absolute;
+  left: 285;
+  bottom: 20rpx;
+  width: 250rpx;
+  height: 62rpx;*/
+}
+
+.cart-count-box text {
+  display: inline-block;
+  height:60rpx;
+  line-height: 60rpx;
+  text-align: center;
+}
+
+.cart-count-down, .cart-count-add {
+  font-size: 44rpx;
+  width: 56rpx;
+  height: 60rpx;
+  border:1px solid #9d9d9d;
+  vertical-align: middle;
+  
+}
+.cart-count-down{
+  color: #eee;
+}
+
+.cart-count-add{
+  color:#FB2F2E
+}
+
+.cart-count-num {
+  width: 90rpx;
+  border-top:1px solid #9d9d9d;
+  border-bottom:1px solid #9d9d9d;
+  vertical-align: middle;
+    color: #ccc;
+}
+
+/*底部开始*/
+.cart-footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 112rpx;
+    box-sizing: border-box;
+    padding:12rpx 0;
+    background: #fff;
+    display: flex;
+    align-items:center;
+    flex-direction:row;
+    z-index: 20;
+
+}
+
+.total-select{
+  padding:0rpx 16rpx 0  40rpx;
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: 33rpx;
+  float: left;
+}
+
+.items-one{
+   flex: 4;
+   font-size: 26rpx;
+   height:112rpx;
+}
+
+
+.items-one text{
+  vertical-align: middle;
+  float: left;
+  line-height: 112rpx;
+}
+
+.items-two{
+  flex: 8;
+  padding-left: 20rpx;
+}
+
+.items-two .items-two-one text{
+  color: #FB2F2E ;
+  font-size: 36rpx;
+}
+
+.items-two .items-two-one .flag-one{
+  font-size: 26rpx;
+}
+
+.items-two-two text{
+  font-size: 22rpx;
+  color: #8B8B8B;
+}
+
+.items-two-two text:nth-of-type(1){
+  padding-right: 20rpx;
+}
+
+
+.items-thr{
+   flex: 5;
+   font-size: 32rpx;
+   text-align: center;
+   background: #FB2F2E;
+   color: #fff;
+   height: 112rpx;
+    line-height: 112rpx;
+}
+
+.cart-container-father .cart-container+.cart-container{
+  margin-top: 20rpx;
+}
+
+.cart-container-father{
+  /*margin-bottom: 32rpx;*/
+}
+
+.item-right-desc .goods-bt{
+  overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box;
+-webkit-line-clamp:1;
+-webkit-box-orient:vertical;
+height:37rpx;
+
+}
+
+.cart-redius{
+  color: #FB2F2E
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

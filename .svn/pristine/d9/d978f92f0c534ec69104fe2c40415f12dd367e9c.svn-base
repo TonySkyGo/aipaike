@@ -1,0 +1,101 @@
+<view class="center_top">
+  <view class="manber_photo">
+    <view class="photo">
+      <image class="photo_size" src="{{imagePath}}"></image>
+    </view>
+    <view class="menber_icon">普通会员</view>
+    <view class="menber_name">{{username}}</view>
+  </view>
+</view>
+<view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部订单</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">待支付订单</view>    
+</view>  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 51}}px" bindchange="bindChange">  
+    <view class="semetent"></view>
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:{{winHeight-45}}px">
+        <view class="order_all_details" wx:for="{{menberList}}" wx:for-item="item" wx:for-index="index">
+          <view class="order_all_details_title">
+            <view class="order_num">
+              订单编号：{{item.sn}}
+            </view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 10 && !item.expired}}">待付款</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 10 && item.expired}}">已过期</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 60 }}">已取消</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 50 && item.auditResult == 2}}">已关闭</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 50 && item.auditResult != 2}}">已退款</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 40 || item.paymentStatus == 51}}">待收货</view>
+            <view class="order_state" wx:if="{{(item.paymentStatus == 40 || item.paymentStatus == 51) && item.orderStatusSign == 40}}">已收货</view>
+          </view>
+<navigator url="../orderdetail/orderdetail?id={{item.orderId}}" class="navigator_details">
+           <view class="order_img_txt" wx:for="{{menberList[index].wsOrderGroups[0].orderItemVos}}" wx:for-item="itemObjAll" >
+            <view class="order_img">
+              <image class="order_img_img" src="{{itemObjAll.thumbnail}}"></image>
+            </view>
+            <view class="order_txt">
+              <view class="order_txt_title">
+                {{itemObjAll.name}}
+              </view>
+              <view class="order_txt_size_color">
+                <view class="order_txt_size_color_color">颜色:{{itemObjAll.valueColor}}</view>
+                <view class="order_txt_size_color_size">尺码:{{itemObjAll.valueSize}}</view>
+                <view class="order_txt_size_color_num">x{{itemObjAll.quantity}}</view>
+              </view>
+            </view>
+          </view>
+          </navigator>
+          <view class="order_total {{(item.paymentStatus == 10 && !item.expired) ? '' : 'disnone'}}">
+            <view class="order_total_txt">合计:</view>
+            <view class="order_total_num">￥{{item.factPayFee}}</view>
+            <view class="pay_button" bindtap="payforNow" data-sn="{{item.sn}}">立即支付</view>
+          </view>
+        </view>        
+        <view style="height:30rpx;"></view>
+      </scroll-view>
+    </swiper-item>  
+    <!-- 我是呵呵 -->  
+    <view class="semetent"></view>
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:{{winHeight-45}}px"> 
+        <view class="order_all_details" wx:for="{{menberwitePayList}}" wx:for-item="item" wx:for-index="idnex" wx:key="wsOrderGroups">
+          <view class="order_all_details_title">
+            <view class="order_num">
+              订单编号：{{item.sn}}
+            </view>
+           <view class="order_state" wx:if="{{item.paymentStatus == 10 && !item.expired}}">待付款</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 10 && item.expired}}">已过期</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 60 }}">已取消</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 50 && item.auditResult == 2}}">已关闭</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 50 && item.auditResult != 2}}">已退款</view>
+            <view class="order_state" wx:if="{{item.paymentStatus == 40 || item.paymentStatus == 51}}">待收货</view>
+            <view class="order_state" wx:if="{{(item.paymentStatus == 40 || item.paymentStatus == 51) && item.orderStatusSign == 40}}">已收货</view>
+          </view>
+          <navigator url="../orderdetail/orderdetail?id={{item.orderId}}" class="navigator_details">
+          <view class="order_img_txt" wx:for="{{menberwitePayList[idnex].wsOrderGroups[0].orderItemVos}}" wx:for-item="itemObj">
+            <view class="order_img">
+              <image class="order_img_img" src="{{itemObj.thumbnail}}"></image>
+            </view>
+            <view class="order_txt">
+              <view class="order_txt_title">
+                {{itemObj.name}}
+              </view>
+             <view class="order_txt_size_color">
+                <view class="order_txt_size_color_color">颜色:{{itemObj.valueColor}}</view>
+                <view class="order_txt_size_color_size">尺码:{{itemObj.valueSize}}</view>
+                <view class="order_txt_size_color_num">x{{itemObj.quantity}}</view>
+              </view>
+            </view>
+          </view>
+          </navigator>
+          <view class="order_total {{(item.paymentStatus == 10 && !item.expired) ? '' : 'disnone'}}">
+            <view class="order_total_txt">合计:</view>
+            <view class="order_total_num">￥{{item.factPayFee}}</view>
+            <view class="pay_button" bindtap="payforNow" data-sn="{{item.sn}}">立即支付</view>
+          </view>
+        </view>
+        <view style="height:30rpx;"></view>
+      </scroll-view>  
+    </swiper-item>
+    <!-- 我是嘿嘿 -->  
+</swiper>  

@@ -1,0 +1,49 @@
+.fanx-container-wrap{
+    background: #fff;
+    width: 646rpx;
+    height: 628rpx;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left:50%;
+     -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding:66rpx 42rpx 30rpx;
+    box-sizing: border-box;
+    z-index: 12;
+
+}
+.fanx-container-wrap .fx-must-now{
+    color: #4a4a4a;
+    font-size: 40rpx;
+    text-align: center;
+    margin-bottom: 30rpx;
+}
+
+.fanx-container-wrap .y-tit{
+    font-size: 28rpx;
+    color: #9b9b9b;
+    line-height: 44rpx;
+}
+
+.bg-sure{
+    display: block;
+    margin: 40rpx auto 0;
+     width: 358rpx;
+     height: 112rpx;
+}
+
+.bg-sure image{
+    width: 358rpx;
+    height: 112rpx;
+}
+
+.fanx-container-wrap .y-del{
+    position: absolute;
+    top: 0;
+    right: 2%;
+    width: 52rpx;
+    height: 74rpx;
+}
+

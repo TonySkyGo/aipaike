@@ -1,0 +1,176 @@
+import { Promise } from '../../utils/util';
+
+/**
+ *  查询接口
+ */
+// const API = 'http://japi.zto.cn/zto/api_utf8/baseArea?msg_type=GET_AREA&data=';
+const API = 'https://test.aipaike.com/api/common/getAreaList.jhtml';
+
+
+Page({
+  data: {
+
+  },
+
+  addDot: function (arr) {
+    // debugger;
+    if (arr instanceof Array) {
+      arr.map(val => {
+        if (val.areaName.length > 4) {
+          val.areaName = val.areaName.slice(0, 4) + '...';
+          return val;
+        } else {
+          val.areaName = val.areaName;
+          return val;
+        }
+      })
+    }
+  },
+  /**
+   * 初始化区域数据
+   */
+  onLoad: function () {
+    var _that = this;
+    this.setData({
+      isShow: false, // 显示区域选择框
+      showDistrict: true // 默认为省市区三级区域选择
+    });
+    Promise(wx.request, {
+      url: API,
+      method: 'GET'
+    }).then((shq) => {
+      const firstProvince = shq.data.content[0].areaName;
+      const firstCity = shq.data.content[0].childrens[0].areaName;
+      const firstDistrict = shq.data.content[0].childrens[0].childrens[0].areaName;
+
+      // 省份的数据
+      var proviceData = [];
+      for(let i = 0;i < shq.data.content.length;i++){
+          proviceData.push({
+            areaId:shq.data.content[i].areaId,
+            areaName:shq.data.content[i].areaName
+          });
+      }
+      //市的数据
+      var cityData= [];
+      for(let j = 0;j < shq.data.content[0].childrens.length;j++){
+          cityData.push({
+            areaId:shq.data.content[0].childrens[j].areaId,
+            areaName:shq.data.content[0].childrens[j].areaName
+          });
+      }
+      //区的数据
+      if(shq.data.content[0].childrens[0].childrens.length > 0){
+          var districtData = [];
+          for(let k = 0;k < shq.data.content[0].childrens[0].childrens.length;k++){
+            districtData.push({
+              areaId:shq.data.content[0].childrens[0].childrens[k].areaId,
+              areaName:shq.data.content[0].childrens[0].childrens[k].areaName
+            });
+          }
+      }
+      this.setData({
+        value: [0, 0, 0],
+        address: firstProvince+"-"+firstCity+"-"+firstDistrict,
+        proviceData:proviceData,//省份
+        cityData:cityData,//市
+        districtData:districtData//区
+      });
+    }).catch((e) => {
+      console.log(e);
+    })
+  },
+  /**
+   * 页面选址触发事件
+   */
+  choosearea: function () {
+    this.setData({
+      isShow: true
+    })
+  },
+  /**
+   * 滑动事件
+   */
+  bindChange: function (e) {
+    debugger;
+    const current_value = e.detail.value, _data = this.data;
+
+    console.log('发生滑动事件');
+    console.log("旧值");
+    console.log(_data.value);
+    console.log('新值：');
+    console.log(current_value);
+
+    if (current_value.length > 2) {
+      // 若省份值发生改变
+      if (this.data.value[0] !== current_value[0]) {
+        // 滑动省份
+        // 从api请求当前省份的城市列表，Promise写法，可以参考学习
+        Promise(wx.request, {
+          url: API + _data.proviceData[current_value[0]].code,
+          method: 'GET'
+        }).then((city) => {
+          this.addDot(city.data.result);
+          this.setData({
+            cityData: city.data.result
+          })
+          return (
+            Promise(wx.request, {
+              url: API + city.data.result[0].code,
+              method: 'GET'
+            })
+          );
+        }).then((district) => {
+          if (district.data.result.length > 0) {
+            this.addDot(district.data.result);
+            this.setData({
+              districtData: district.data.result,
+              'value[0]': current_value[0],
+              'value[1]': 0,
+              'value[2]': 0
+            })
+
+            this.setData({
+              address: this.data.proviceData[current_value[0]].fullName + ' - ' + this.data.cityData[0].fullName + ' - ' + district.data.result[0].fullName
+            })
+          }
+
+
+        }).catch((e) => {
+          console.log(e);
+        })
+      } else if (//若城市值发生了改变
+        this.data.value[0] === current_value[0] 
+      && this.data.value[1] !== current_value[1]) {
+        // 滑动城市
+        Promise(wx.request, {
+          url: API + _data.cityData[current_value[1]].code,
+          method: 'GET'
+        }).then((district) => {
+          if (district.data.result.length > 0) {
+            this.addDot(district.data.result);
+            this.setData({
+              districtData: district.data.result,
+              'value[0]': current_value[0],
+              'value[1]': current_value[1],
+              'value[2]': 0,
+              address: this.data.proviceData[current_value[0]].fullName + ' - ' + this.data.cityData[current_value[1]].fullName + ' - ' + district.data.result[0].fullName
+            })
+          }
+        }).catch((e) => {
+          console.log(e);
+        })
+
+      } else if (//地区值发生了改变
+        this.data.value[0] === current_value[0] 
+        && this.data.value[1] === current_value[1] 
+        && this.data.value[2] !== current_value[2]) {
+        // 滑动地区
+        this.setData({
+          value: current_value,
+          address: this.data.proviceData[current_value[0]].fullName + ' - ' + this.data.cityData[current_value[1]].fullName + ' - ' + this.data.districtData[current_value[2]].fullName
+        })
+      }
+    }
+  }
+})

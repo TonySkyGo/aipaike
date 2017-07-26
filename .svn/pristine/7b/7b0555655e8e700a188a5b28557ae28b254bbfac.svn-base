@@ -1,0 +1,134 @@
+<!--index.wxml-->
+<scroll-view  scroll-y="true" style="height:100%" class="container"  bindscroll="bindscrollGo" bindscrolltoupper = "upper">
+<view class="logoimgtxt">
+     <view class="img_logo"></view>
+</view>
+  <view class="toplogo">
+    
+    <view class="searchBar" bindtap="goToSearch">
+      <image src="../assets/images/serch_icon.jpg" class="search_img"></image>
+      <view  class="search_icon">搜索爱拍客商品</view>
+    </view> 
+  </view>
+  <view class="navigation_menu">
+    <view class="coupon">
+      <view class="coupon_img" bindtap="myCoupon"></view>
+      <view class="rule_line"></view>
+    </view>
+    <view class="shopping">
+      <view class="shopping_img" bindtap="scanCodeFun"></view>
+        <view class="rule_line"></view>
+      </view>
+    <view class="classify" bindtap="Category">
+      <view class="classify_img"></view>
+    </view> 
+  </view>
+ <view class="cllssify_text">
+    <view class="coupon_txt">我的优惠券</view>
+    <view class="shopping_txt">扫码购物</view>
+    <view class="rule_txt">商品分类</view>
+  </view>
+  <view class="commodity_list">
+    <view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">精品推荐</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">门店热销</view>  
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">附近门店</view>  
+</view>  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300"  bindchange="bindChange" style="height:1000rpx" >  
+    
+    <swiper-item>  
+      <scroll-view scroll-y="{{allowScroll}}"  class="boutique_list"  bindscrolltolower="boutiqueFreshTodown" style="height:100%"  bindscroll="bindscrollIn" >
+      
+        <view class="boutique_details" wx:for="{{listDataBoutique}}" wx:for-index="index" wx:for-item="item">
+        <navigator url="../details/details?id={{item.goodsId}}" class="navigator_details">
+          <view class="boutique_img activity_img">
+            <view class="storeshinee"></view>
+            <image src="{{item.goodsImg}}" class="shoe_img"></image>
+          </view>
+          <view class="boutique_info" >
+            <view class="boutique_title">
+              {{item.goodsName}}
+            </view>
+            <view class="price_pay">
+              <view class="price">￥{{item.price}}</view>
+              <view class="member_icon member_bg {{item.vipName=='会员' ? '' : 'disnone'}}">会员</view>
+              <view class="member_icon selling_bg {{item.signName.length >=0 ? '' : 'disnone'}}">特卖</view>
+              <view class="member_icon rebate_bg {{item.signName.length >=0 ? '' : 'disnone'}}">返10%</view>
+              <view class="pay">
+                <image src="../assets/images/pay_icon.jpg" class="pay_img"></image>
+              </view>
+            </view>
+          </view>
+          </navigator>
+        </view>
+        
+      
+      </scroll-view> 
+      
+    </swiper-item>  
+    
+    <swiper-item>  
+      <scroll-view  scroll-y="{{allowScroll}}"  class="boutique_list"  bindscrolltolower="sameFreshTodown"  style="height:960rpx">
+        <view class="boutique_details" wx:for="{{listDataSame}}" wx:for-index="index" wx:for-item="item" bindtap="jumpDetails">
+         <navigator url="../details/details?id={{item.goodsId}}" class="navigator_details">
+          <view class="boutique_img activity_img">
+            <view class="storeshinee"></view>
+            <image src="{{item.goodsImg}}" class="shoe_img"></image>
+          </view>
+          <view class="boutique_info" >
+            <view class="boutique_title">
+              {{item.goodsName}}
+            </view>
+            <view class="price_pay">
+              <view class="price">￥{{item.price}}</view>
+              <view class="member_icon member_bg {{item.vipName=='会员' ? '' : 'disnone'}}">会员</view>
+              <view class="member_icon selling_bg {{item.signName.length >=0 ? '' : 'disnone'}}">特卖</view>
+              <view class="member_icon rebate_bg {{item.signName.length >=0 ? '' : 'disnone'}}">返10%</view>
+              <view class="pay">
+                <image src="../assets/images/pay_icon.jpg" class="pay_img"></image>
+              </view>
+            </view>
+          </view>
+          </navigator>
+        </view>
+     
+      </scroll-view>   
+    </swiper-item>  
+    
+    <swiper-item class="nearshop">  
+      <view class="searchNearshop">
+        <icon class="nearshop_icon" />
+        <input type="text" confirm-type="search" class="nearshop_inp" placeholder="搜索门店" bindblur="NearBlur" />
+        <icon class="nearshop_loc" />
+      </view> 
+      <scroll-view scroll-y="{{allowScroll}}" class="nearshop_list"  bindscrolltolower="">
+        <view class="nonearshop">{{noNearShop}}</view>
+        <view class="nearshop_details clearfix" wx:for="{{listNearShop}}" wx:for-index="index" wx:for-item="item">
+          <view class="nearshop_info">
+            <image src="{{item.logo}}" class="shoe_img"></image>
+            <view class="nearshop_na">
+              <text class="nearshop_name">{{item.storeName}}</text>
+              <view class="nearshop_address"><icon />{{item.address}}</view>
+            </view>
+          </view>
+
+          <view class="nearshop_phone" data-phone="{{item.telphone}}" bindtap="nearPhone">
+            <icon />
+            <text class="nearshop_text">店铺电话</text>
+            <text class="nearshop_num">{{item.telphone}}</text>
+          </view>
+          
+          <view class="nearshop_location">{{item.distance}}km</view>
+          <navigator url="../nearshop/nearshop?id={{item.id}}&lng={{item.longitude}}&lat={{item.latitude}}">
+          <view class="nearshop_but">查看详情</view>
+          </navigator>
+        </view>  
+             </scroll-view> 
+    </swiper-item>   
+</swiper> 
+<loading hidden="{{loadingHidden}}">
+	加载中...
+</loading>
+  </view>
+</scroll-view>
+ 

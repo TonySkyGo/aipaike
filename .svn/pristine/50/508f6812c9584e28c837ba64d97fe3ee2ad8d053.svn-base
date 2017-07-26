@@ -1,0 +1,19 @@
+<view class="item-up">
+  <image class="goods-img" src="../assets/images/shoe_img.jpg"></image>
+  <view class="item-right-desc">
+    <view style='color: #000;'>
+      <text>物流状态</text>
+      <text style='color:#79AC44;padding-left: 16rpx;'>运输中</text>
+    </view>
+    <view>承运来源：EMS速递</view>
+    <view>运单编号：345987665544333355</view>
+    <view>官方电话：暂无</view>
+  </view>
+</view>
+
+
+<view class='wl-desc-info'>
+  <view class='wl-title'>物流跟踪</view>
+
+
+</view>

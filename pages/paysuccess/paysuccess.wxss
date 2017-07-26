@@ -1,0 +1,95 @@
+/* pages/paysuccess/paysuccess.wxss */
+
+.red {
+  color: #fb2f2e;
+}
+
+.pay-success-container {
+  margin-top: 25rpx;
+  background: #fff;
+}
+
+.suc-top {
+  display: flex;
+  align-content: center;
+  box-sizing: border-box;
+}
+
+.pay-suc-icon {
+  padding-top: 10rpx;
+  vertical-align: top;
+}
+
+.kd {
+  width: 376rpx;
+  height: 207rpx;
+  padding: 98rpx 15rpx 25rpx 46rpx;
+}
+
+.flag-right-desc {
+  font-size: 26rpx;
+  color: #9a9a9a;
+}
+
+.flag-right-desc {
+  padding: 98rpx 36rpx 25rpx 0;
+}
+
+.look-order-shopping{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:30rpx 100rpx 60rpx;
+
+
+}
+
+.look-order-shopping .redd{
+    background: #FB2F2E;
+    border-radius: 36px;
+    font-size: 26rpx;
+    color: #fff;
+    width: 244rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+}
+
+.look-order-shopping .goTo-btn{
+    font-size: 26rpx;
+    color: #FB2F2E ;
+    border:1px solid #FB2F2E;
+    width: 244rpx;
+    height: 60rpx;
+     text-align: center;
+    line-height: 60rpx;
+     border-radius: 36px;
+}
+
+
+.like-icon{
+    display: block;
+    width: 272rpx;
+    height: 62rpx;
+    margin: 0 auto 30rpx;
+}
+
+@import "../common-template/goods-list-template/goods-list-template.wxss";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

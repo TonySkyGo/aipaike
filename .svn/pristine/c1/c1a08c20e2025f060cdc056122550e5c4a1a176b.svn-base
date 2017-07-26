@@ -1,0 +1,172 @@
+<!-- pages/searchs/searchs.wxml-->
+<!-- <import src='../common-template/hot-select-template/hot-select-template.wxml' /> -->
+
+<!--头部搜索条 s-->
+<view class="search-input">
+  <view>
+    <image class="search-image-icon" src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WqSAELmKAAAGETy3AEE671.png"></image>
+    <input type="text" placeholder="搜索本店好货" placeholder-class="placeholder" bindblur="onBindBlur" value="{{inputValue}}" />
+    <view style='position: absolute;right: 0;top: 0;width: 50rpx;height:65rpx;' catchtap='returnSeactOne'>
+      <image src="../assets/images/y_closed.png" class="close-img-icon"></image>
+    </view>
+  </view>
+  <text class="cancel" catchtap='switchTabFn'>取消</text>
+</view>
+<!--头部搜索条 e-->
+
+
+<!--热搜与历史组件 s-->
+<view class="hot-history-container" wx:if="{{hotHistoryContainer}}">
+  <!--热搜组件 s-->
+  <view class="hot-history-title">热搜</view>
+  <view class='clearfix'>
+    <block wx:for='{{brandHotsArrY}}' wx:for-index='index'>
+      <view catchtap='hotSearchFn' data-item="{{item}}">
+        <view class="hot-bar">
+            <view class="hot-desc">{{item}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!--热搜组件 e-->
+
+
+  <!--历史s-->
+  <view class="history-bar">
+    <view class="hot-history-title">历史搜索</view>
+    <view class='no-search-record' wx:if='{{searchRecordsArrY.length == 0}}'>暂无历史搜索记录</view>
+    <view wx:else>
+        <block wx:for="{{searchRecordsArrY}}" wx:for-item="item">
+          <view class="history-desc">
+            <text catchtap='hotSearchFn' data-item='{{item}}'>{{item}}</text>
+            <image class='close-img-icon' src="../assets/images/y_closed.png" catchtap='delCurrentBar' data-item-text="{{item}}" data-index="{{index}}"></image>
+          </view>
+        </block>
+    </view>
+    
+
+    <!--清空历史记录-->
+    <view class="clear-history-flag" bindtap='empAllSearchRecord' wx:if="{{searchRecordsArrY.length > 0}}">
+      <image class='del-icon' src="http://img.aipaike.com/group1/M00/10/22/Cvv7ZVk2WqSADfK3AAABh-46Wpc676.png"></image>
+      <text>清空历史搜索</text>
+    </view>
+  </view>
+  <!--历史e-->
+</view>
+<!--热搜与历史组件 e-->
+
+
+<!--搜索列表开始-->
+<view class="search-list-container" wx:if="{{searchListContainer}}">
+  <!--搜索列表切换标题开始-->
+  <view class="list-four-title">
+
+    <view class='{{currentTab==0 ? "sel" : ""}}' catchtap='comrankFn' data-current='0' data-comrank='comrank,desc'>
+      <text>综合</text>
+    </view>
+
+    <view class='{{currentTab==1 ? "sel" : ""}}' catchtap='salenumFn' data-salenum="salenum,desc" data-current='1'>
+      <text>销量</text>
+      <!-- <image src="../assets/images/jt_down.png"></image> -->
+    </view>
+
+    <view wx:if='{{priceAscDescFlag == 0}}' class='{{currentTab==2 ? "sel" : ""}}' catchtap='sortFn' data-current='2' data-pricesx='price,asc' data-pricejx='price,desc'>
+      <text>价格</text>
+      <image wx:if="{{sxUp}}" src="../assets/images/jt_up.png"></image>
+      <image wx:elif="{{jxDown}}" src="../assets/images/jt_down.png"></image>
+      <image wx:else src="../assets/images/jt_default.png"></image>
+    </view>
+
+    <view class='{{currentTab==3 ? "sel" : ""}}' catchtap="slideToggle" data-current='3'>
+      <text>筛选</text>
+      <image id='sxSelect' src="../assets/images/y_common_down.png"></image>
+    </view>
+  </view>
+  <!--搜索列表切换标题结束-->
+
+  <!--搜索列表开始-->
+  <view class="goods-list-template">
+    <scroll-view scroll-y='true' style='height: 952rpx'>
+      <view wx:if="{{searchListEmpty}}" style='text-align: center;'>
+        <image src="../assets/images/search_eee.png" style='display: block;width: 276rpx;height:267rpx;margin: 0 auto 50rpx; padding-top: 140rpx;'></image>
+        <text style='color: #959595;'>暂无此商品，换个方式搜索吧~</text>
+      </view>
+      <view wx:else class="list-wrapper">
+        <navigator url="../details/details" wx:for="{{goodsListArrY}}" wx:for-item="item">
+          <view class="goods-list-li">
+            <view class="images-pos">
+              <image class='goods-list-pic' src="{{item.goodsImg}}"></image>
+            </view>
+            <text class="goods-title">{{item.goodsName}}</text>
+            <view class="price-bsign-wrapper" wx:if="{{item.tabArray.length <= 2}}">
+              <text class="price">¥{{item.price}}</text>
+              <block wx:for="{{item.tabArray}}" wx:for-item='i'>
+                <text class="bSign">{{i}}</text>
+              </block>
+            </view>
+            <view class="price-bsign-wrapper" wx:else>
+              <view>
+                <block wx:for="{{item.tabArray}}" wx:for-item='i'>
+                  <text class="bSign">{{i}}</text>
+                </block>
+              </view>
+              <text class="price">¥{{item.price}}</text>
+            </view>
+            <image wx:if="{{item.isSameStore}}" class='tk-img' src="../assets/images/list_tk.png"></image>
+          </view>
+        </navigator>
+      </view>
+    </scroll-view>
+  </view>
+  <!--搜索列表结束-->
+</view>
+<!--搜索列表结束-->
+
+
+<view id="app-mask" wx:if="{{slideBarFlag}}" bindtap="appMaskHide"></view>
+
+
+<!--筛选开始-->
+<scroll-view scroll-y='true' style='position: fixed;right:0;top:0;height:1336rpx;width: 80%;z-index: 12' wx:if="{{falseSlideBar}}">
+  <view class="slide-bar {{slideBarFlag? 'c-state1': ''}}">
+    <view class="sx-title">筛选</view>
+
+    <!-- //品牌 -->
+    <view class='clearfix' wx:if="{{sxBrands}}">
+      <view class='slide-tit-xsd'>品牌</view>
+      <block wx:for='{{sxBrandsArr}}' wx:for-item='j'>
+        <!-- sel-border  {{currentItem==j.id?'sel-border':''}} -->
+        <view class="hot-bar {{currentItempp==index?'sel-border':''}}" catchtap='clickBrands' data-id="{{index}}" data-keybrands='{{j}}'>
+          <view class="hot-desc">{{j}}</view>
+        </view>
+      </block>
+    </view>
+
+
+    <!-- 类别 -->
+    <view class='clearfix'>
+      <view class='slide-tit-xsd'>类别</view>
+      <block wx:for="{{subSearchCategoryVoListArr}}" wx:for-item="item">
+        <view class="hot-bar  {{currentItemlb==index?'sel-border':''}}" catchtap='clickCaregory' data-lb="{{index}}">
+          <view class="hot-desc">{{item}}</view>
+        </view>
+      </block>
+    </view>
+
+
+    <!-- 价格区间 -->
+    <view class='clearfix'>
+      <view class='slide-tit-xsd'>价格区间</view>
+      <block wx:for="{{priceAreasArr}}">
+        <view class="hot-bar {{currentItemjg==index?'sel-border':''}}">
+          <view class="hot-desc" catchtap='clickPrice' data-jg='{{index}}'>{{item.startPrice}}-{{item.endPrice}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="reset-sure">
+      <view class="reset">重置</view>
+      <view class="sure" catchtap='sureSlideClose'>确认</view>
+    </view>
+  </view>
+</scroll-view>
+<!--筛选结束

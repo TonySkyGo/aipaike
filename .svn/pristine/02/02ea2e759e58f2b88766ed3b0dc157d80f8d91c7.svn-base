@@ -1,0 +1,39 @@
+<view class="slide-bar">
+    <view class="sx-title">筛选</view>
+
+    <!-- //品牌 -->
+    <view class='clearfix' wx:if="{{sxBrands}}">
+      <view class='slide-tit-xsd'>品牌</view>
+      <block wx:for='{{sxBrandsArr}}' wx:for-item='j'>
+        <!-- sel-border  {{currentItem==j.id?'sel-border':''}} -->
+        <view class="hot-bar {{currentItempp==index?'sel-border':''}}" catchtap='clickBrands' data-id="{{index}}" data-keybrands='{{j}}'>
+          <view class="hot-desc">{{j}}</view>
+        </view>
+      </block>
+    </view>
+
+
+    <!-- 类别 -->
+    <view class='clearfix'>
+      <view class='slide-tit-xsd'>类别</view>
+      <block wx:for="{{subSearchCategoryVoListArr}}" wx:for-item="item">
+        <view class="hot-bar  {{currentItemlb==index?'sel-border':''}}" catchtap='clickCaregory' data-lb="{{index}}" data-ca>
+          <view class="hot-desc">{{item}}</view>
+        </view>
+      </block>
+    </view>
+
+    <!-- 价格区间 -->
+    <view class='clearfix'>
+      <view class='slide-tit-xsd'>价格区间</view>
+      <block wx:for="{{priceAreasArr}}">
+        <view class="hot-bar {{currentItemjg==index?'sel-border':''}}">
+          <view class="hot-desc" catchtap='clickPrice' data-jg='{{index}}'>{{item.startPrice}}-{{item.endPrice}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="reset-sure">
+      <view class="reset" catchtap='resetFn'>重置</view>
+      <view class="sure" catchtap='sureSlideClose'>确认</view>
+    </view>
+  </view>

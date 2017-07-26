@@ -1,0 +1,166 @@
+<import src='../common-template/coupon-number-template/coupon-number-template.wxml' />
+<!--<import src="../wxParse/wxParse.wxml"/>-->
+<view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">未使用({{unUseCount}})</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已使用({{useCount}})</view>  
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">已过期({{expiredCount}})</view>  
+</view>  
+  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="100%" bindchange="bindChange">  
+    <!-- 未使用 -->  
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:1100rpx" bindscrolltolower = "tolower" >
+      <view class="have_coupon" wx:if="{{havenoUsesList.length == 0}}">
+          <view class="have_coupon_bg"></view>
+          <view class="have_coupon_txt">暂无优惠券</view>
+        </view>
+      <view class="details_all"  wx:for="{{havenoUsesList}}"  wx:for-item="item" wx:for-index="idx">
+        <view class="coupon_details">
+         <view class="coupon_details_right_jjdq" wx:if="{{item.isExpireFlag == 3}}"> 
+            </view>
+            <view class="coupon_details_left">
+            <view class="coupon_details_left_centent">
+              <view class="coupon_details_left_num">
+                ￥{{item.denomination}}
+              </view>
+              <view class="coupon_details_left_explain">
+                {{item.desc}}
+              </view>
+              </view>
+            </view>
+            <view class="coupon_details_right">
+           
+            
+              <view class="coupon_details_right_top">
+              <view class="coupon_icon_md">{{item.useOrg}}</view>
+                <view class="coupon_txt">
+                 {{item.codeTitle}}
+                </view>
+              </view>
+               <view class="coupon_user_date">
+                  <view class="user_date">{{item.beginDate}}-{{item.endDate}}</view>
+                  <view class="ticket_number" data-code= "{{item.code}}" bindtap="alertConpunDetails" wx:if="{{item.useRange == '门店券'}}">查看券号</view>
+                </view>
+                <view class="use_explain"  bindtap="havenoUseSmDisplay"  data-idx="{{idx}}">
+                  <view class="use_explain_txt" >使用说明
+                  <view class="{{item.display != 'none' ? 'use_explain_arrow_up' : 'use_explain_arrow'}}"></view>
+                  </view>
+                  
+                </view>
+            </view>
+        </view>
+        <view class="use_explain_zk" wx:if="{{item.display != 'none'}}">
+          <view class="use_explain_zk_content">
+              {{useSm[idx]}}
+            <!--<template is="wxParse" data="{{wxParseData:replaecHtmlList.nodes}}"/>-->
+          </view>
+        </view>
+        
+       </view>
+       
+      </scroll-view>  
+      <!--<view class="haveNoMore">{{loadingMore}}</view>-->
+    </swiper-item>  
+    <!-- 已使用 -->  
+    <swiper-item>  
+     <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+      <view class="have_coupon" wx:if="{{haveUsesList.length == 0}}">
+          <view class="have_coupon_bg"></view>
+          <view class="have_coupon_txt">暂无优惠券</view>
+        </view>
+      <view class="details_all"  wx:for="{{haveUsesList}}"  wx:for-item="item" wx:for-index="indx">
+        <view class="coupon_details">
+            <view class="have_use"></view>
+            <view class="coupon_details_left_overdue">
+            <view class="coupon_details_left_centent">
+              <view class="coupon_details_left_num">
+                ￥{{item.denomination}}
+              </view>
+              <view class="coupon_details_left_explain">
+                {{item.desc}}
+              </view>
+              </view>
+            </view>
+            <view class="coupon_details_right">
+           
+            <view class="coupon_icon_md_overdue">{{item.useOrg}}</view>
+              <view class="coupon_details_right_top">
+                <view class="coupon_txt">
+                  {{item.codeTitle}}
+                </view>
+              </view>
+               <view class="coupon_user_date">
+                  <view class="user_date">{{item.beginDate}}-{{item.endDate}}</view>
+                  
+                </view>
+                <view class="use_explain">
+                  <view class="use_explain_txt" data-indx="{{indx}}" bindtap="haveUseSmDisplay1">已使用</view>
+                  <!--<view class="{{userCellId == idx ? 'use_explain_arrow_up' : 'use_explain_arrow'}}"></view>-->
+                </view>
+            </view>
+        </view>
+        <!--<view class="use_explain_zk {{userCellId2 == indx ? '' : 'disnone'}}">
+          <view class="use_explain_zk_content">
+            {{replaecHtmlListUse[indx]}}
+          </view>
+        </view>-->
+       
+        </view>
+      </scroll-view>   
+    </swiper-item>  
+    <!-- 已过期 -->  
+    <swiper-item>  
+     <scroll-view scroll-y="true" style="height:{{winHeight-80}}px">
+        <view class="have_coupon" wx:if="{{haveOverdueList.length == 0}}">
+          <view class="have_coupon_bg"></view>
+          <view class="have_coupon_txt">暂无优惠券</view>
+        </view>
+        <view class="details_all"  wx:for="{{haveOverdueList}}"  wx:for-item="item" wx:for-index="index">
+        <view class="coupon_details">
+            <view class="have_overdue"></view>
+            <view class="coupon_details_left_overdue">
+            <view class="coupon_details_left_centent">
+              <view class="coupon_details_left_num">
+                ￥{{item.denomination}}
+              </view>
+              <view class="coupon_details_left_explain">
+                {{item.desc}}
+              </view>
+              </view>
+            </view>
+            <view class="coupon_details_right">
+           
+            <view class="coupon_icon_md_overdue">{{item.useOrg}}</view>
+              <view class="coupon_details_right_top">
+                <view class="coupon_txt">
+                  {{item.codeTitle}}
+                </view>
+              </view>
+               <view class="coupon_user_date">
+                  <view class="user_date">{{item.beginDate}}-{{item.endDate}}</view>
+                  
+                </view>
+                <view class="use_explain">
+                  <view class="use_explain_txt" data-indx="{{index}}" bindtap="haveUseSmDisplay1">已过期</view>
+                  <!--<view class="{{userCellId == idx ? 'use_explain_arrow_up' : 'use_explain_arrow'}}"></view>-->
+                </view>
+            </view>
+        </view>
+        <!--<view class="use_explain_zk {{userCellId3 == index ? '' : 'disnone'}}">
+          <view class="use_explain_zk_content">
+          {{item.introduction}}
+          </view>
+        </view>-->
+     
+        </view>
+      </scroll-view>  
+    </swiper-item>  
+</swiper>  
+<!--<view class="activation">
+  <view class="coupon_num">
+     <input class="coupon_num_input" placeholder="如有优惠券码，请输入优惠券码激活" auto-focus/>
+  </view>
+  <view class="activation_button" bindtap="activationCoupon">激活</view>
+</view>-->
+<template is="{{alertName}}" data="{{alertName,alertMask,coupon_code}}"></template>
+<view id="app-mask" style="display:{{alertMask}}"></view>

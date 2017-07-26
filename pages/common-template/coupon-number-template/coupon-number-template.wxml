@@ -1,0 +1,23 @@
+<import src='../../coupon/coupon.js' />
+<template name="coupon-number-template">
+    <view class='fanx-container-wrap'>
+       <view class='fx-must-now'>50元优惠通用券</view>
+       <view class='y-tit'>
+           <image class="code_img"   src="http://img.aipaike.com/group1/M00/10/23/Cvv7ZVk2Wu6AJPA8AAEaETYCcZo014.png"></image>
+           <image src="http://img.aipaike.com/group1/M00/10/2C/Cvv7ZVlCQMiAUL9RAAAltn2yvt0244.png" class="bar_code"></image>
+       <view class="coupon_number">券号{{coupon_code}}</view>
+       
+       </view>
+      
+       <image class='y-del' src="../assets/images/y_del.png" bindtap="closeAlert"></image>
+      <view class="use_shuoming">
+        <view class="use_sm_title">使用说明</view>
+        <view class="use_sm_content">
+          1、本券有效日期至:2017年1月15日
+            2、凭券到活动门店可抵扣10元，每单限使用1张
+            3、该券全渠道通用，除配套商品外,可与实体店同享
+            4、本券属于一次性使用的兑换券，不可提现，不设找零，截屏无效，过期作废
+        </view>
+      </view>
+    </view>
+</template>

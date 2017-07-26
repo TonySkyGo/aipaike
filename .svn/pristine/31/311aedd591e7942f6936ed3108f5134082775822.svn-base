@@ -1,0 +1,41 @@
+<import src='../common-template/goods-list-template/goods-list-template.wxml' />
+<!--pages/paysuccess/paysuccess.wxml-->
+<view class='pay-success-container'>
+
+  <view class='suc-top'>
+    <image class='kd' src="../assets/images/y_kd.png"></image>
+    <view class='flag-right-desc'>
+      <view style='text-align: center;'>
+        <icon type="success" size="16" color="red" class="pay-suc-icon" />
+        <text class='red' style='font-size: 34rpx;vertical-align: middle;padding-left: 30rpx;'>付款成功啦！</text>
+      </view>
+      <view style='margin-top: 20rpx;'>
+        已确认您的订单，仓库配送准备中，将会在48小时内发货，为了方便收货联系，请您保持电话通畅。
+      </view>
+    </view>
+  </view>
+
+
+  <view class='look-order-shopping'>
+      <view class='redd'>
+          <text>查看订单</text>
+      </view>
+      <view class='goTo-btn'>
+          <text>继续购物</text>
+      </view>
+  </view>
+
+
+
+<image class='like-icon' src="../assets/images/y_like_cai.png"></image>
+
+ <template is="goods-list-template"></template>
+
+</view>
+
+
+
+
+
+
+

@@ -1,0 +1,267 @@
+let app = getApp();
+let util = require('../../utils/util.js');
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    delBtnWidth: 122,//删除按钮宽度单位（rpx）
+    cartVo:{},
+    currentFlag:true,//全选开关
+    delBtnWidth:122
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  buyAndSettlement: function () { //结算
+  
+    wx.navigateTo({
+      url: '../balances/balances?cartItemType=0',
+    })
+  },
+  onLoad: function (options) {
+     
+  },
+
+  onShow: function () {
+    this.initData();
+  },
+  //增加的按钮
+  addCount(event){
+    this.commonAddRedus(event,true)
+  },
+  reduseCount(event){
+    this.commonAddRedus(event,false)
+  },
+  //增加减少的公共方法
+  commonAddRedus(event,AddAndRedus){
+    var num = 0;
+    var _self = this;
+    num = event.currentTarget.dataset.quantity;
+    let cartItemId = event.currentTarget.dataset.cartd
+    if(AddAndRedus){
+      num++
+    }else if(!AddAndRedus){
+      num--;
+      if(num <= 0){
+        num = 1;
+      }
+     
+    }
+    let addMountUrl = app.globalData.apkBase+'/api/cart/updateItem.jhtml';
+    let data = {
+      id:cartItemId,
+      quantity:num
+    }
+    app.httpPOST(addMountUrl,data,function(res){
+
+        if(res.data.code == 0){
+          _self.initData();
+        }else if(res.data.code == 18004){
+          var desc = '库存不足';
+           wx.showLoading({
+              mask:true,
+              title: desc
+           })
+           setTimeout(function(){
+              util.hideLoading();
+           },800)
+        }
+    })
+  },
+  //购物车勾选
+  gCartsFn(event){
+    var _self = this;
+    const gCartsUrl = app.globalData.apkBase+'/api/cart/changeCheck.jhtml';
+    // debugger;  
+    let cartid = event.currentTarget.dataset.cartid;
+    let currentFlag = event.currentTarget.dataset.flag;
+     if(currentFlag){
+      this.setData({
+          currentFlag:false
+      })
+    }else{
+      this.setData({
+          currentFlag:true
+      })
+    }
+    let data = {
+      id:cartid,
+      checked :this.data.currentFlag  
+    }
+    // debugger;
+     app.httpPOST(gCartsUrl,data,function(res){
+        if(res.data.code == 0){
+          _self.initData();
+        }
+     })
+  },
+  //商户全选
+  cartGroupCheck(event){
+    // debugger;
+    let _self = this;
+    const groupAllUrl = app.globalData.apkBase+'/api/cart/changeOrgAll.jhtml';
+    let orgid = event.currentTarget.dataset.orgid;
+    let currentFlag = event.currentTarget.dataset.flag;
+    if(currentFlag){
+      this.setData({
+          currentFlag:false
+      })
+    }else{
+      this.setData({
+          currentFlag:true
+      })
+    }
+    let data = {
+      id:orgid,
+      checked :this.data.currentFlag  
+    }
+     app.httpPOST(groupAllUrl,data,function(res){
+        if(res.data.code == 0){
+          _self.initData();
+        }
+     })
+  },
+  //全选
+  selectAllFn(event){
+    let _self = this;
+    let selectAllUrl = app.globalData.apkBase+'/api/cart/changeAll.jhtml';
+    let currentFlag = event.currentTarget.dataset.flag;
+    if(currentFlag){
+      this.setData({
+          currentFlag:false
+      })
+    }else{
+      this.setData({
+          currentFlag:true
+      })
+    }
+    let data = {
+      checked:this.data.currentFlag  
+    }
+    app.httpPOST(selectAllUrl,data,function(res){
+      if(res.data.code == 0){
+        _self.initData();
+      }
+    })
+  },
+  //获取购物车列表的数据
+  initData(){
+    // debugger;
+    var that = this;
+    util.showLoading();
+    let cartUrl =app.globalData.apkBase + '/api/cart/listNew.jhtml';
+    let data = {};
+    app.httpGET(cartUrl,data,function(res){
+      
+      util.hideLoading();
+      if(res.data.code == 0){
+        that.setData({
+          cartVo:{}
+        })
+        let cartVo = res.data.content;
+        // cartVo.totalQuantity = 0;
+        that.setData({
+          cartVo:cartVo
+        })
+      }else{
+        console.log(res.data.desc);
+      }
+
+    });
+  },
+
+  //手指刚放到屏幕触发
+  touchS: function (e) {
+    // debugger;
+    if(e.touches.length==1){
+      this.setData({
+        //记录触摸起始位置的X坐标
+        startX:e.touches[0].clientX
+      });
+    }
+  },
+  //触摸时触发，手指在屏幕上每移动一次，触发一次
+  touchM: function (e) {
+    // debugger;
+    if(e.touches.length==1){
+      //手指移动时水平方向位置
+      var moveX = e.touches[0].clientX;
+      //手指起始点位置与移动期间的差值
+      var disX = this.data.startX - moveX;
+      var delBtnWidth = this.data.delBtnWidth;
+      var txtStyle = "";
+      if(disX == 0 || disX < 0){//如果移动距离小于等于0，文本层位置不变
+        txtStyle = "left:0px";
+      }else if(disX > 0 ){//移动距离大于0，文本层left值等于手指移动距离
+        txtStyle = "left:-"+disX+"px";
+        if(disX>=delBtnWidth){
+          //控制手指移动距离最大值为删除按钮的宽度
+          txtStyle = "left:-"+delBtnWidth+"px";
+        }
+      }
+      var index = e.currentTarget.dataset.index;
+      var indexgroup = e.currentTarget.dataset.group;
+      var cartItemVos = this.data.cartVo.cartGroupVos[indexgroup].cartItemVos;//没有促销
+      if(cartItemVos.length > 0){
+          cartItemVos[index].txtStyle = txtStyle;
+      }else if(this.data.cartVo.cartGroupVos[indexgroup].promotionVos.length >0){
+        var idx = e.currentTarget.dataset.idx;
+        var promotionVos = this.data.cartVo.cartGroupVos[indexgroup].promotionVos[idx].cartItemVos;//有促销的
+        promotionVos[index].txtStyle = txtStyle;
+      }
+
+      this.setData({
+        cartVo:this.data.cartVo
+      });
+    }
+  },
+  touchE:function(e){
+    // debugger;
+    if(e.changedTouches.length==1){
+      //手指移动结束后水平位置
+      var endX = e.changedTouches[0].clientX;
+      //触摸开始与结束，手指移动的距离
+      var disX = this.data.startX - endX;
+      var delBtnWidth = this.data.delBtnWidth;
+      //如果距离小于删除按钮的1/2，不显示删除按钮
+      var txtStyle = disX > delBtnWidth/2 ? "left:-"+delBtnWidth+"px":"left:0px";
+      //获取手指触摸的是哪一项
+      var index = e.currentTarget.dataset.index;
+      var indexgroup = e.currentTarget.dataset.group;
+      var cartItemVos = this.data.cartVo.cartGroupVos[indexgroup].cartItemVos;//没有促销
+      if(cartItemVos.length > 0){
+          cartItemVos[index].txtStyle = txtStyle;
+      }else if(this.data.cartVo.cartGroupVos[indexgroup].promotionVos.length >0){
+        var idx = e.currentTarget.dataset.idx;
+        var promotionVos = this.data.cartVo.cartGroupVos[indexgroup].promotionVos[idx].cartItemVos;//有促销的
+        promotionVos[index].txtStyle = txtStyle;
+      }
+      //更新列表的状态
+      this.setData({
+         cartVo:this.data.cartVo
+      });
+    }
+  },
+  delCartItem(e){
+    var _self = this;
+    let delCartUrl = app.globalData.apkBase+"/api/cart/delete.jhtml";
+    
+    let cartItemId = e.currentTarget.dataset.cartid;
+    let data = {
+      id:cartItemId
+    }
+    app.httpPOST(delCartUrl,data,function(res){
+        if(res.data.code == 0){
+          _self.initData();
+        }
+    });
+  }
+})
+
+
+
+
+

@@ -1,0 +1,39 @@
+<!--pages/gladdress/gladdress.wxml-->
+<view class='gladdress-title'>
+  <image class='dw_icon' src="../assets/images/y_dingwei.png"></image>
+  <text class='text'>添加收货地址</text>
+  <image class='y-right' src="../assets/images/y_right.png"></image>
+</view>
+
+
+
+
+<view class='flag-address selected-border'>
+  <view class='yes-address'>
+    <view class='items-per-num'>
+      <text>收货人：yoomi</text>
+      <text>联系电话：186780900766</text>
+    </view>
+    <view class='detail-address'>
+      <text>地址：</text>
+      <text>福建省厦门市思明区SM奥康品牌店福建省厦门市思明区SM奥康品牌店</text>
+    </view>
+  </view>
+
+  <view class='mr-bar'>
+    <view class='items-flag'>
+      <icon type="success" size="16" color="red" class="cart-pro-select" style='vertical-align: middle;'/>
+      <text style='vertical-align: middle;padding-left: 20rpx;'>设为默认</text>
+    </view>
+    <view class='items-flag'>
+      <image style='width: 33rpx;height:31rpx;vertical-align: top;padding:5rpx 10rpx 0 0;' src="../assets/images/abc_edit.png"></image>
+      <text>编辑</text>
+    </view>
+    <view class='items-flag'>
+      <image style='width:31rpx;height:32rpx;vertical-align: top;padding:5rpx 10rpx 0 0;' src="../assets/images/y_icon_del.png"></image>
+      <text>删除</text>
+    </view>
+  </view>
+</view>
+
+

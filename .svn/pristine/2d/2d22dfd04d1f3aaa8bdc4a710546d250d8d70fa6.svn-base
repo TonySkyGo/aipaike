@@ -1,0 +1,140 @@
+// pages/orderdetail/orderdetail.js
+var app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    orderDetails:[],//订单详情
+    businessList:[],//商家
+    commodityList:[],//
+    maxRebateValue:'',//返利
+    paymentStatus:'',//订单状态
+  },
+  delOrder:function(e){
+    var that = this;
+    
+    var url = "https://test.aipaike.com/api/member/order/delete.jhtml";
+    var data = { //删除订单
+      sn: e.target.dataset.sn
+    }
+    app.httpGET(url, data, function (res) {
+debugger
+    if (res.data.content == "删除成功"){
+      wx.showToast({
+        title: '删除成功',
+        icon: 'succes',
+        duration: 2000,
+        mask: true
+      });
+      wx.navigateBack({
+        delta: 1,
+      })
+        }
+    }, "GET");
+  },
+  payforNow:function(e){
+    var that = this;
+    var openid = getApp().globalData.openId;
+    var url = "https://test.aipaike.com/api/payment/submit.jhtml";
+    var data = { //获取支付信息
+      type: "payment",
+      paymentPluginId: "weixinAppletPayPlugin",
+      sn: e.target.dataset.sn,
+      openid: openid,
+    };
+
+    app.httpGET(url, data, function (res) {
+
+      wx.requestPayment(
+        {
+          timeStamp: res.data.content.timeStamp,
+          nonceStr: res.data.content.nonceStr,
+          package: res.data.content.package,
+          signType: res.data.content.signType,
+          paySign: res.data.content.paySign,
+          success: function (res) {
+            wx.redirectTo({
+              url: '../paysuccess/paysuccess',
+            })
+          },
+          'fail': function (res) {
+            console.log(res)
+          },
+          'complete': function (res) { }
+        })
+    }, "GET");
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    that.setData({
+      paymentStatus: options.paymentStatus
+    })
+    var url = "https://test.aipaike.com/api/member/order/view.jhtml";
+    var data = { //全部订单
+      id: options.id
+    }
+    app.httpGET(url, data, function (res) {
+
+      that.setData({
+        orderDetails: res.data.content,
+        businessList: res.data.content.wsOrderGroups,
+        commodityList:'',
+      });
+      
+    }, "GET");
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+  
+  }
+})

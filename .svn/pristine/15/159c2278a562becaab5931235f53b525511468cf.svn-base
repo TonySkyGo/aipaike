@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/shopCarts/shopCarts",
+    "pages/index/index",    
+    "pages/address/address",
+    "pages/details/details",
+    "pages/searchs/searchs",
+    "pages/gladdress/gladdress",
+    "pages/orderdetail/orderdetail",
+    "pages/wlDesc/wlDesc",
+    "pages/balances/balances",
+    "pages/paysuccess/paysuccess",
+    "pages/logs/logs",
+    "pages/evaluate/evaluate",
+    "pages/menberCenter/menberCenter",
+    "pages/coupon/coupon"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#fb2f2e",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "爱拍客购物",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/assets/images/index_icon_select.png",
+        "selectedIconPath": "pages/assets/images/index_icon.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/shopCarts/shopCarts",
+        "iconPath": "pages/assets/images/shoppingcar.png",
+        "selectedIconPath": "pages/assets/images/shoppingcar_select.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/menberCenter/menberCenter",
+        "iconPath": "pages/assets/images/me.png",
+        "selectedIconPath": "pages/assets/images/me_select.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

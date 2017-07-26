@@ -1,0 +1,13 @@
+<template name="goods-details-template">
+ <view class="goods_num">
+         <view class="num_txt">
+          数量
+        </view>
+        <view class="counter_div">
+          <view class="counter_m" bindtap="subtraction"> - </view>
+          <view class="counter_num">{{countBuy}}</view>
+          <view class="counter_p" bindtap="addition"> + </view>
+        </view>
+        <view class="stock_num">库存{{stockBuy}}件</view>
+      </view>
+</template>      

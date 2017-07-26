@@ -1,0 +1,31 @@
+<template name="goods-list-template">
+  <!--搜索列表开始-->
+  <view class="goods-list-template">
+    <scroll-view scroll-y='true' style='height: 1250rpx'>
+      <view wx:if="{{searchListEmpty}}">搜索内容为空</view>
+      <view class="list-wrapper">
+        <view class="goods-list-li">
+          <view class="images-pos">
+            <image class='goods-list-pic' src="../assets/images/shoe_img.jpg"></image>
+          </view>
+          <text class="goods-title">鞋子3鞋子鞋子鞋子鞋子鞋子鞋子</text>
+          <!--<view class="price-bsign-wrapper">
+                <text class="price">¥299</text>
+                <text class="bSign">会员</text>
+                <text class="bSign">特卖</text>
+              </view>-->
+          <view class="price-bsign-wrapper">
+            <view>
+              <text class="bSign">会员</text>
+              <text class="bSign">特卖</text>
+              <text class="bSign">返利10%</text>
+            </view>
+            <text class="price">¥299</text>
+          </view>
+          <image class='tk-img' src="../assets/images/list_tk.png"></image>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!--搜索列表结束-->
+</template>
